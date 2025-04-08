@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Box - Admin Page</title>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/admin-style.css" rel="stylesheet" />
+    <style>
+        .Form1, .Form2, .Form3 {
+            display: none;
+        }
+        .form-active {
+            display: block !important;
+        }
+        .step {
+            padding: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .step.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-navigation {
+            margin-top: 20px;
+            padding: 10px;
+        }
+        .upload {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('admin-head') -%>
+    <div class="create-process">
+        <div class="step active" id="step1">1. Event Information</div>
+        <div class="step" id="step2">2. Timeline & Ticket</div>
+        <div class="step" id="step3">3. Setting</div>
+    </div>
+    <div class="admin-container">
+        <!-- Form 1 -->
+        <div class="Form1 form-active" id="Form1">
+            <div class="upload">
+                <div class="event-image">
+                    <div class="event-logo">
+                        <input type="file" id="logo-image" accept="image/*">
+                        <img id="logo-preview" alt="Logo Preview">
+                    </div>
+                    <div class="event-banner">
+                        <input type="file" id="banner-image" accept="image/*">
+                        <img id="banner-preview" alt="Banner Preview">
+                    </div>
+                </div>
+                <div class="event-name">
+                    <label class="title" for="event-name">Event Name</label>
+                    <input type="text" id="event-name" placeholder="Enter event name">
+                </div>
+            </div>
+
+            <div class="upload" id="upload-event-address">
+                <label class="title" for="event-address">Event Address</label>
+                
+                <div class="form-group">
+                    <input type="radio" id="offline" name="event-type" value="offline" />
+                    <label for="offline">Offline</label>
+                    <input type="radio" id="online" name="event-type" value="online" />
+                    <label for="online">Online</label>
+                </div>
+
+                <label for="venue-name">Venue Name</label>
+                <input type="text" id="venue-name" name="venue-name" placeholder="Enter the venue name" />
+
+                <div class="form-group">
+                    <div class="address-province">
+                        <label for="city-province">City/Province</label>
+                        <select id="city-province" name="city-province">
+                            <option value="">Select a city or province</option>
+                            <option value="An Giang">An Giang</option>
+                            <option value="Ba Ria - Vung Tau">Bà Rịa - Vũng Tàu</option>
+                            <option value="Bac Giang">Bắc Giang</option>
+                            <option value="Bac Kan">Bắc Kạn</option>
+                            <option value="Bac Lieu">Bạc Liêu</option>
+                            <option value="Bac Ninh">Bắc Ninh</option>
+                            <option value="Ben Tre">Bến Tre</option>
+                            <option value="Binh Dinh">Bình Định</option>
+                            <option value="Binh Duong">Bình Dương</option>
+                            <option value="Binh Phuoc">Bình Phước</option>
+                            <option value="Binh Thuan">Bình Thuận</option>
+                            <option value="Ca Mau">Cà Mau</option>
+                            <option value="Can Tho">Cần Thơ</option>
+                            <option value="Cao Bang">Cao Bằng</option>
+                            <option value="Da Nang">Đà Nẵng</option>
+                            <option value="Dak Lak">Đắk Lắk</option>
+                            <option value="Dak Nong">Đắk Nông</option>
+                            <option value="Dien Bien">Điện Biên</option>
+                            <option value="Dong Nai">Đồng Nai</option>
+                            <option value="Dong Thap">Đồng Tháp</option>
+                            <option value="Gia Lai">Gia Lai</option>
+                            <option value="Ha Giang">Hà Giang</option>
+                            <option value="Ha Nam">Hà Nam</option>
+                            <option value="Ha Noi">Hà Nội</option>
+                            <option value="Ha Tinh">Hà Tĩnh</option>
+                            <option value="Hai Duong">Hải Dương</option>
+                            <option value="Hai Phong">Hải Phòng</option>
+                            <option value="Hau Giang">Hậu Giang</option>
+                            <option value="Hoa Binh">Hoà Bình</option>
+                            <option value="Hung Yen">Hưng Yên</option>
+                            <option value="Khanh Hoa">Khánh Hòa</option>
+                            <option value="Kien Giang">Kiên Giang</option>
+                            <option value="Kon Tum">Kon Tum</option>
+                            <option value="Lai Chau">Lai Châu</option>
+                            <option value="Lam Dong">Lâm Đồng</option>
+                            <option value="Lang Son">Lạng Sơn</option>
+                            <option value="Lao Cai">Lào Cai</option>
+                            <option value="Long An">Long An</option>
+                            <option value="Nam Dinh">Nam Định</option>
+                            <option value="Nghe An">Nghệ An</option>
+                            <option value="Ninh Binh">Ninh Bình</option>
+                            <option value="Ninh Thuan">Ninh Thuận</option>
+                            <option value="Phu Tho">Phú Thọ</option>
+                            <option value="Phu Yen">Phú Yên</option>
+                            <option value="Quang Binh">Quảng Bình</option>
+                            <option value="Quang Nam">Quảng Nam</option>
+                            <option value="Quang Ngai">Quảng Ngãi</option>
+                            <option value="Quang Ninh">Quảng Ninh</option>
+                            <option value="Quang Tri">Quảng Trị</option>
+                            <option value="Soc Trang">Sóc Trăng</option>
+                            <option value="Son La">Sơn La</option>
+                            <option value="Tay Ninh">Tây Ninh</option>
+                            <option value="Thai Binh">Thái Bình</option>
+                            <option value="Thai Nguyen">Thái Nguyên</option>
+                            <option value="Thanh Hoa">Thanh Hóa</option>
+                            <option value="Thua Thien Hue">Thừa Thiên Huế</option>
+                            <option value="Tien Giang">Tiền Giang</option>
+                            <option value="Ho Chi Minh">TP Hồ Chí Minh</option>
+                            <option value="Tra Vinh">Trà Vinh</option>
+                            <option value="Tuyen Quang">Tuyên Quang</option>
+                            <option value="Vinh Long">Vĩnh Long</option>
+                            <option value="Vinh Phuc">Vĩnh Phúc</option>
+                            <option value="Yen Bai">Yên Bái</option>
+                        </select>
+                    </div>
+                    <div class="address-district">
+                        <label for="district">District</label>
+                        <select id="district" name="district">
+                            <option value="">Chọn quận/huyện</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="event-details">Event Details</label>
+                <input type="text" id="event-details" name="event-details" placeholder="Enter the event address" />
+            </div>
+
+            <div class="upload">
+                <label for="event-category">Event Category</label>
+                <select id="event-category" name="event-category">
+                    <option value="">Select a category</option>
+                    <option value="Music">Music</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Performance">Performance</option>
+                    <option value="Conference">Conference</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Exhibition">Exhibition</option>
+                </select>
+            </div>
+
+            <div class="upload" id="ticket-time">
+                <div class="input-field">
+                    <label for="start-time">Event Start Time:</label>
+                    <input type="datetime-local" id="start-time" name="start-time">
+                </div>
+                <div class="input-field">
+                    <label for="end-time">Event End Time:</label>
+                    <input type="datetime-local" id="end-time" name="end-time">
+                </div>
+            </div>
+
+            <div class="upload">
+                <label>Event description</label>
+                <textarea id="description" name="description" rows="20" cols="30"></textarea>
+            </div>
+
+            <div class="upload" id="organizer">
+                <label class="title" for="event-organizer">Event Organizer</label>
+                <div class="form-group">
+                    <div class="event-logo">
+                        <input id="organizer-logo" type="file" accept="image/*">
+                    </div>
+                    <div id="organizer-info">
+                        <label>Organizer Name</label>
+                        <input type="text" id="event-organizer" name="event-organizer" placeholder="Enter the event organizer" />
+                        <label>Organizer Description</label>
+                        <textarea id="organizer-description" name="description" rows="5" cols="30"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form 2 -->
+        <div class="Form2" id="Form2">
+            <div class="upload2">
+                <button class="add-ticket-btn" id="addTicketBtn">Add Ticket Type</button>
+            </div>
+            
+            <div class="add-ticket-form" id="addTicketForm" style="display: none;">
+                <form id="ticketForm">
+                    <label for="ticketName">* Ticket name</label>
+                    <input type="text" id="ticketName" required>
+
+                    <label for="ticketPrice">* Ticket price</label>
+                    <div class="form-group">
+                        <input style="width: 120px;" type="number" id="ticketPrice" placeholder="Enter price">
+                        <label><input type="checkbox" id="freeTicket"> Free</label>
+                    </div>
+
+                    <label for="totalTickets">* Total number of tickets</label>
+                    <input style="width: 120px;" type="number" id="totalTickets" required placeholder="Enter quantity">
+
+                    <label for="ticketDescription">* Ticket description</label>
+                    <textarea id="ticketDescription" rows="4" required></textarea>
+
+                    <button type="button" id="saveTicket" class="save-btn">Add</button>
+                    <button type="button" class="cancel-btn" id="cancelForm">Cancel</button>
+                </form>
+            </div>
+
+            <div id="ticketList">
+                <!-- Tickets will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Form 3 -->
+        <div class="Form3" id="Form3">
+            <div class="upload">
+                <h2>Event Settings</h2>
+                <div class="setting-group">
+                    <label for="maxTicketsPerUser">Maximum tickets per user:</label>
+                    <input type="number" id="maxTicketsPerUser" min="1" value="4">
+                </div>
+                
+                <div class="setting-group">
+                    <label for="ticketVisibility">Ticket Visibility:</label>
+                    <select id="ticketVisibility">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label>
+                        <input type="checkbox" id="enableWaitlist">
+                        Enable waitlist for sold-out tickets
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label>Payment Methods:</label>
+                    <div>
+                        <label>
+                            <input type="checkbox" name="paymentMethods" value="credit">
+                            Credit Card
+                        </label>
+                        <label>
+                            <input type="checkbox" name="paymentMethods" value="bank">
+                            Bank Transfer
+                        </label>
+                        <label>
+                            <input type="checkbox" name="paymentMethods" value="momo">
+                            MoMo
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="form-navigation">
+            <button id="back-btn" style="display: none;">Back</button>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const districtData = {
+            "Ha Noi": [
+                "Ba Đình", "Hoàn Kiếm", "Hai Bà Trưng", "Đống Đa", "Tây Hồ", "Cầu Giấy", 
+                "Thanh Xuân", "Hoàng Mai", "Long Biên", "Nam Từ Liêm", "Bắc Từ Liêm", "Hà Đông",
+                "Sơn Tây", "Ba Vì", "Chương Mỹ", "Đan Phượng", "Đông Anh", "Gia Lâm",
+                "Hoài Đức", "Mê Linh", "Mỹ Đức", "Phú Xuyên", "Phúc Thọ", "Quốc Oai",
+                "Sóc Sơn", "Thạch Thất", "Thanh Oai", "Thanh Trì", "Thường Tín", "Ứng Hòa"
+            ],
+            "Ho Chi Minh": [
+                "Quận 1", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", 
+                "Quận 10", "Quận 11", "Quận 12", "Quận Bình Tân", "Quận Bình Thạnh", 
+                "Quận Gò Vấp", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú",
+                "Thành phố Thủ Đức", "Huyện Bình Chánh", "Huyện Cần Giờ", "Huyện Củ Chi",
+                "Huyện Hóc Môn", "Huyện Nhà Bè"
+            ],
+            "Da Nang": [
+        "Hải Châu", "Thanh Khê", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu", "Cẩm Lệ",
+        "Hòa Vang", "Hoàng Sa"
+    ],
+    "Hai Phong": [
+        "Hồng Bàng", "Lê Chân", "Ngô Quyền", "Kiến An", "Hải An", "Đồ Sơn",
+        "Dương Kinh", "An Dương", "An Lão", "Kiến Thụy", "Tiên Lãng", "Vĩnh Bảo",
+        "Cát Hải", "Bạch Long Vĩ"
+    ],
+    "Can Tho": [
+        "Ninh Kiều", "Bình Thủy", "Cái Răng", "Ô Môn", "Thốt Nốt",
+        "Vĩnh Thạnh", "Cờ Đỏ", "Phong Điền", "Thới Lai"
+    ],
+    "An Giang": [
+        "Long Xuyên", "Châu Đốc", "An Phú", "Tân Châu", "Phú Tân", "Châu Phú",
+        "Tịnh Biên", "Tri Tôn", "Châu Thành", "Chợ Mới", "Thoại Sơn"
+    ],
+    "Ba Ria - Vung Tau": [
+        "Vũng Tàu", "Bà Rịa", "Châu Đức", "Xuyên Mộc", "Long Điền",
+        "Đất Đỏ", "Tân Thành", "Côn Đảo"
+    ],
+    "Bac Giang": [
+        "Bắc Giang", "Yên Thế", "Tân Yên", "Lạng Giang", "Lục Nam",
+        "Lục Ngạn", "Sơn Động", "Yên Dũng", "Việt Yên", "Hiệp Hòa"
+    ],
+    "Bac Kan": [
+        "Bắc Kạn", "Pác Nặm", "Ba Bể", "Ngân Sơn", "Bạch Thông",
+        "Chợ Đồn", "Chợ Mới", "Na Rì"
+    ],
+    "Bac Lieu": [
+        "Bạc Liêu", "Hồng Dân", "Phước Long", "Vĩnh Lợi", "Giá Rai",
+        "Đông Hải", "Hoà Bình"
+    ],
+    "Bac Ninh": [
+        "Bắc Ninh", "Yên Phong", "Quế Võ", "Tiên Du", "Từ Sơn",
+        "Thuận Thành", "Gia Bình", "Lương Tài"
+    ],
+    "Ben Tre": [
+        "Bến Tre", "Châu Thành", "Chợ Lách", "Mỏ Cày Nam", "Giồng Trôm",
+        "Bình Đại", "Ba Tri", "Thạnh Phú", "Mỏ Cày Bắc"
+    ],
+    "Binh Dinh": [
+        "Quy Nhơn", "An Lão", "Hoài Nhơn", "Hoài Ân", "Phù Mỹ", "Phù Cát",
+        "Vĩnh Thạnh", "Tây Sơn", "Vân Canh", "An Nhơn", "Tuy Phước"
+    ],
+    "Binh Duong": [
+        "Thủ Dầu Một", "Bàu Bàng", "Dầu Tiếng", "Bến Cát", "Phú Giáo",
+        "Tân Uyên", "Dĩ An", "Thuận An", "Bắc Tân Uyên"
+    ],
+    "Binh Phuoc": [
+        "Đồng Xoài", "Bình Long", "Phước Long", "Bù Gia Mập", "Lộc Ninh",
+        "Bù Đốp", "Hớn Quản", "Đồng Phú", "Bù Đăng", "Chơn Thành", "Phú Riềng"
+    ],
+    "Binh Thuan": [
+        "Phan Thiết", "La Gi", "Tuy Phong", "Bắc Bình", "Ham Thuận Bắc",
+        "Hàm Thuận Nam", "Tánh Linh", "Đức Linh", "Hàm Tân", "Phú Quí"
+    ],
+    "Ca Mau": [
+        "Cà Mau", "U Minh", "Thới Bình", "Trần Văn Thời", "Cái Nước",
+        "Đầm Dơi", "Năm Căn", "Phú Tân", "Ngọc Hiển"
+    ],
+    "Cao Bang": [
+        "Cao Bằng", "Bảo Lâm", "Bảo Lạc", "Thông Nông", "Hà Quảng",
+        "Trà Lĩnh", "Trùng Khánh", "Hạ Lang", "Quảng Uyên", "Phục Hoà",
+        "Hoà An", "Nguyên Bình", "Thạch An"
+    ],
+            "Dak Lak": [
+    "Buôn Ma Thuột", "Buôn Hồ", "Ea H'leo", "Ea Súp", "Buôn Đôn",
+    "Cư M'gar", "Krông Búk", "Krông Năng", "Ea Kar", "M'Đrắk",
+    "Krông Bông", "Krông Pắc", "Krông A Na", "Lắk", "Cư Kuin"
+],
+"Dak Nong": [
+    "Gia Nghĩa", "Đăk Glong", "Cư Jút", "Đắk Mil", "Krông Nô",
+    "Đắk Song", "Đắk R'Lấp", "Tuy Đức"
+],
+"Dien Bien": [
+    "Điện Biên Phủ", "Mường Lay", "Mường Nhé", "Mường Chà", "Tủa Chùa",
+    "Tuần Giáo", "Điện Biên", "Điện Biên Đông", "Mường Ảng", "Nậm Pồ"
+],
+"Dong Nai": [
+    "Biên Hòa", "Long Khánh", "Tân Phú", "Vĩnh Cửu", "Định Quán",
+    "Trảng Bom", "Thống Nhất", "Cẩm Mỹ", "Long Thành", "Xuân Lộc",
+    "Nhơn Trạch"
+],
+"Dong Thap": [
+    "Cao Lãnh", "Sa Đéc", "Hồng Ngự", "Tân Hồng", "Hồng Ngự",
+    "Tam Nông", "Thanh Bình", "Tháp Mười", "Cao Lãnh", "Lấp Vò",
+    "Lai Vung", "Châu Thành"
+],
+"Gia Lai": [
+    "Pleiku", "An Khê", "Ayun Pa", "KBang", "Đăk Đoa",
+    "Chư Păh", "Ia Grai", "Mang Yang", "Kông Chro", "Đức Cơ",
+    "Chư Prông", "Chư Sê", "Đăk Pơ", "Ia Pa", "Krông Pa",
+    "Phú Thiện", "Chư Pưh"
+],
+"Ha Giang": [
+    "Hà Giang", "Đồng Văn", "Mèo Vạc", "Yên Minh", "Quản Bạ",
+    "Vị Xuyên", "Bắc Mê", "Hoàng Su Phì", "Xín Mần", "Bắc Quang",
+    "Quang Bình"
+],
+"Ha Nam": [
+    "Phủ Lý", "Duy Tiên", "Kim Bảng", "Thanh Liêm", "Bình Lục",
+    "Lý Nhân"
+],
+"Ha Tinh": [
+    "Hà Tĩnh", "Hồng Lĩnh", "Hương Sơn", "Đức Thọ", "Vũ Quang",
+    "Nghi Xuân", "Can Lộc", "Hương Khê", "Thạch Hà", "Cẩm Xuyên",
+    "Kỳ Anh", "Lộc Hà", "Kỳ Anh"
+],
+"Hai Duong": [
+    "Hải Dương", "Chí Linh", "Nam Sách", "Kinh Môn", "Kim Thành",
+    "Thanh Hà", "Cẩm Giàng", "Bình Giang", "Gia Lộc", "Tứ Kỳ",
+    "Ninh Giang", "Thanh Miện"
+],
+"Hau Giang": [
+    "Vị Thanh", "Ngã Bảy", "Châu Thành A", "Châu Thành",
+    "Phụng Hiệp", "Vị Thủy", "Long Mỹ", "Long Mỹ"
+],
+"Hoa Binh": [
+    "Hòa Bình", "Đà Bắc", "Mai Châu", "Lương Sơn", "Kim Bôi",
+    "Cao Phong", "Tân Lạc", "Lạc Sơn", "Yên Thủy", "Lạc Thủy"
+],
+"Hung Yen": [
+    "Hưng Yên", "Văn Lâm", "Văn Giang", "Yên Mỹ", "Mỹ Hào",
+    "Ân Thi", "Khoái Châu", "Kim Động", "Tiên Lữ", "Phù Cừ"
+],
+"Khanh Hoa": [
+    "Nha Trang", "Cam Ranh", "Cam Lâm", "Vạn Ninh", "Ninh Hòa",
+    "Khánh Vĩnh", "Diên Khánh", "Khánh Sơn", "Trường Sa"
+],
+"Kien Giang": [
+    "Rạch Giá", "Hà Tiên", "Kiên Lương", "Hòn Đất", "Tân Hiệp",
+    "Châu Thành", "Giồng Riềng", "Gò Quao", "An Biên", "An Minh",
+    "Vĩnh Thuận", "Phú Quốc", "Kiên Hải", "U Minh Thượng", "Giang Thành"
+],
+"Kon Tum": [
+    "Kon Tum", "Đắk Glei", "Ngọc Hồi", "Đắk Tô", "Kon Plông",
+    "Kon Rẫy", "Đắk Hà", "Sa Thầy", "Tu Mơ Rông", "Ia H'Drai"
+],
+"Lai Chau": [
+    "Lai Châu", "Tam Đường", "Mường Tè", "Sìn Hồ", "Phong Thổ",
+    "Than Uyên", "Tân Uyên", "Nậm Nhùn"
+],
+"Lam Dong": [
+    "Đà Lạt", "Bảo Lộc", "Đam Rông", "Lạc Dương", "Lâm Hà",
+    "Đơn Dương", "Đức Trọng", "Di Linh", "Bảo Lâm", "Đạ Huoai",
+    "Đạ Tẻh", "Cát Tiên"
+],
+"Lang Son": [
+    "Lạng Sơn", "Tràng Định", "Bình Gia", "Văn Lãng", "Cao Lộc",
+    "Văn Quan", "Bắc Sơn", "Hữu Lũng", "Chi Lăng", "Lộc Bình",
+    "Đình Lập"
+],
+"Lao Cai": [
+    "Lào Cai", "Bát Xát", "Mường Khương", "Si Ma Cai", "Bắc Hà",
+    "Bảo Thắng", "Bảo Yên", "Sa Pa", "Văn Bàn"
+],
+"Long An": [
+    "Tân An", "Kiến Tường", "Tân Hưng", "Vĩnh Hưng", "Mộc Hóa",
+    "Tân Thạnh", "Thạnh Hóa", "Đức Huệ", "Đức Hòa", "Bến Lức",
+    "Thủ Thừa", "Tân Trụ", "Cần Đước", "Cần Giuộc", "Châu Thành"
+],
+"Nam Dinh": [
+    "Nam Định", "Mỹ Lộc", "Vụ Bản", "Ý Yên", "Nghĩa Hưng",
+    "Nam Trực", "Trực Ninh", "Xuân Trường", "Giao Thủy", "Hải Hậu"
+],
+"Nghe An": [
+    "Vinh", "Cửa Lò", "Thái Hoà", "Quế Phong", "Quỳ Châu",
+    "Kỳ Sơn", "Tương Dương", "Nghĩa Đàn", "Quỳ Hợp", "Quỳnh Lưu",
+    "Con Cuông", "Tân Kỳ", "Anh Sơn", "Diễn Châu", "Yên Thành",
+    "Đô Lương", "Thanh Chương", "Nghi Lộc", "Nam Đàn", "Hưng Nguyên",
+    "Hoàng Mai"
+],
+"Ninh Binh": [
+    "Ninh Bình", "Tam Điệp", "Nho Quan", "Gia Viễn", "Hoa Lư",
+    "Yên Khánh", "Kim Sơn", "Yên Mô"
+],
+"Ninh Thuan": [
+    "Phan Rang-Tháp Chàm", "Bác Ái", "Ninh Sơn", "Ninh Hải",
+    "Ninh Phước", "Thuận Bắc", "Thuận Nam"
+],
+"Phu Tho": [
+    "Việt Trì", "Phú Thọ", "Đoan Hùng", "Hạ Hoà", "Thanh Ba",
+    "Phù Ninh", "Yên Lập", "Cẩm Khê", "Tam Nông", "Lâm Thao",
+    "Thanh Sơn", "Thanh Thuỷ", "Tân Sơn"
+],
+"Phu Yen": [
+    "Tuy Hoà", "Sông Cầu", "Đồng Xuân", "Tuy An", "Sơn Hòa",
+    "Sông Hinh", "Tây Hoà", "Phú Hoà", "Đông Hòa"
+],
+"Quang Binh": [
+    "Đồng Hới", "Minh Hóa", "Tuyên Hóa", "Quảng Trạch", "Bố Trạch",
+    "Quảng Ninh", "Lệ Thủy", "Ba Đồn"
+],
+"Quang Nam": [
+    "Tam Kỳ", "Hội An", "Tây Giang", "Đông Giang", "Nam Giang",
+    "Phước Sơn", "Nam Trà My", "Bắc Trà My", "Hiệp Đức", "Thăng Bình",
+    "Tiên Phước", "Bắc Bình", "Nam Bình", "Phú Ninh", "Nông Sơn",
+    "Đại Lộc", "Quế Sơn", "Duy Xuyên", "Nui Thành"
+],
+"Quang Ngai": [
+    "Quảng Ngãi", "Bình Sơn", "Trà Bồng", "Sơn Tịnh", "Sơn Hà",
+    "Tư Nghĩa", "Nghĩa Hành", "Minh Long", "Mộ Đức", "Đức Phổ",
+    "Ba Tơ", "Lý Sơn", "Sơn Tây", "Tây Trà"
+],
+"Quang Ninh": [
+    "Hạ Long", "Móng Cái", "Cẩm Phả", "Uông Bí", "Bình Liêu",
+    "Tiên Yên", "Đầm Hà", "Hải Hà", "Ba Chẽ", "Vân Đồn",
+    "Hoành Bồ", "Đông Triều", "Quảng Yên", "Cô Tô"
+],
+"Quang Tri": [
+    "Đông Hà", "Quảng Trị", "Vĩnh Linh", "Hướng Hóa", "Gio Linh",
+    "Đa Krông", "Cam Lộ", "Triệu Phong", "Hải Lăng", "Cồn Cỏ"
+],
+"Soc Trang": [
+    "Sóc Trăng", "Châu Thành", "Kế Sách", "Mỹ Tú", "Cù Lao Dung",
+    "Long Phú", "Mỹ Xuyên", "Ngã Năm", "Thạnh Trị", "Vĩnh Châu",
+    "Trần Đề"
+],
+"Son La": [
+    "Sơn La", "Quỳnh Nhai", "Thuận Châu", "Mường La", "Bắc Yên",
+    "Phù Yên", "Mai Sơn", "Sông Mã", "Yên Châu", "Mộc Châu",
+    "Sốp Cộp", "Vân Hồ"
+],
+"Tay Ninh": [
+    "Tây Ninh", "Tân Biên", "Tân Châu", "Dương Minh Châu", "Châu Thành",
+    "Hòa Thành", "Gò Dầu", "Bến Cầu", "Trảng Bàng"
+],
+"Thai Binh": [
+    "Thái Bình", "Quỳnh Phụ", "Hưng Hà", "Đông Hưng", "Thái Thụy",
+    "Tiền Hải", "Kiến Xương", "Vũ Thư"
+],
+"Dak Lak": [
+    "Buôn Ma Thuột", "Buôn Hồ", "Ea H'leo", "Ea Súp", "Buôn Đôn",
+    "Cư M'gar", "Krông Búk", "Krông Năng", "Ea Kar", "M'Đrắk",
+    "Krông Bông", "Krông Pắc", "Krông A Na", "Lắk", "Cư Kuin"
+],
+"Dak Nong": [
+    "Gia Nghĩa", "Đăk Glong", "Cư Jút", "Đắk Mil", "Krông Nô",
+    "Đắk Song", "Đắk R'Lấp", "Tuy Đức"
+],
+"Dien Bien": [
+    "Điện Biên Phủ", "Mường Lay", "Mường Nhé", "Mường Chà", "Tủa Chùa",
+    "Tuần Giáo", "Điện Biên", "Điện Biên Đông", "Mường Ảng", "Nậm Pồ"
+],
+"Dong Nai": [
+    "Biên Hòa", "Long Khánh", "Tân Phú", "Vĩnh Cửu", "Định Quán",
+    "Trảng Bom", "Thống Nhất", "Cẩm Mỹ", "Long Thành", "Xuân Lộc",
+    "Nhơn Trạch"
+],
+"Dong Thap": [
+    "Cao Lãnh", "Sa Đéc", "Hồng Ngự", "Tân Hồng", "Hồng Ngự",
+    "Tam Nông", "Thanh Bình", "Tháp Mười", "Cao Lãnh", "Lấp Vò",
+    "Lai Vung", "Châu Thành"
+],
+"Gia Lai": [
+    "Pleiku", "An Khê", "Ayun Pa", "KBang", "Đăk Đoa",
+    "Chư Păh", "Ia Grai", "Mang Yang", "Kông Chro", "Đức Cơ",
+    "Chư Prông", "Chư Sê", "Đăk Pơ", "Ia Pa", "Krông Pa",
+    "Phú Thiện", "Chư Pưh"
+],
+"Ha Giang": [
+    "Hà Giang", "Đồng Văn", "Mèo Vạc", "Yên Minh", "Quản Bạ",
+    "Vị Xuyên", "Bắc Mê", "Hoàng Su Phì", "Xín Mần", "Bắc Quang",
+    "Quang Bình"
+],
+"Ha Nam": [
+    "Phủ Lý", "Duy Tiên", "Kim Bảng", "Thanh Liêm", "Bình Lục",
+    "Lý Nhân"
+],
+"Ha Tinh": [
+    "Hà Tĩnh", "Hồng Lĩnh", "Hương Sơn", "Đức Thọ", "Vũ Quang",
+    "Nghi Xuân", "Can Lộc", "Hương Khê", "Thạch Hà", "Cẩm Xuyên",
+    "Kỳ Anh", "Lộc Hà", "Kỳ Anh"
+],
+"Hai Duong": [
+    "Hải Dương", "Chí Linh", "Nam Sách", "Kinh Môn", "Kim Thành",
+    "Thanh Hà", "Cẩm Giàng", "Bình Giang", "Gia Lộc", "Tứ Kỳ",
+    "Ninh Giang", "Thanh Miện"
+],
+"Hau Giang": [
+    "Vị Thanh", "Ngã Bảy", "Châu Thành A", "Châu Thành",
+    "Phụng Hiệp", "Vị Thủy", "Long Mỹ", "Long Mỹ"
+],
+"Hoa Binh": [
+    "Hòa Bình", "Đà Bắc", "Mai Châu", "Lương Sơn", "Kim Bôi",
+    "Cao Phong", "Tân Lạc", "Lạc Sơn", "Yên Thủy", "Lạc Thủy"
+],
+"Hung Yen": [
+    "Hưng Yên", "Văn Lâm", "Văn Giang", "Yên Mỹ", "Mỹ Hào",
+    "Ân Thi", "Khoái Châu", "Kim Động", "Tiên Lữ", "Phù Cừ"
+],
+"Khanh Hoa": [
+    "Nha Trang", "Cam Ranh", "Cam Lâm", "Vạn Ninh", "Ninh Hòa",
+    "Khánh Vĩnh", "Diên Khánh", "Khánh Sơn", "Trường Sa"
+],
+"Kien Giang": [
+    "Rạch Giá", "Hà Tiên", "Kiên Lương", "Hòn Đất", "Tân Hiệp",
+    "Châu Thành", "Giồng Riềng", "Gò Quao", "An Biên", "An Minh",
+    "Vĩnh Thuận", "Phú Quốc", "Kiên Hải", "U Minh Thượng", "Giang Thành"
+],
+"Kon Tum": [
+    "Kon Tum", "Đắk Glei", "Ngọc Hồi", "Đắk Tô", "Kon Plông",
+    "Kon Rẫy", "Đắk Hà", "Sa Thầy", "Tu Mơ Rông", "Ia H'Drai"
+],
+"Lai Chau": [
+    "Lai Châu", "Tam Đường", "Mường Tè", "Sìn Hồ", "Phong Thổ",
+    "Than Uyên", "Tân Uyên", "Nậm Nhùn"
+],
+"Lam Dong": [
+    "Đà Lạt", "Bảo Lộc", "Đam Rông", "Lạc Dương", "Lâm Hà",
+    "Đơn Dương", "Đức Trọng", "Di Linh", "Bảo Lâm", "Đạ Huoai",
+    "Đạ Tẻh", "Cát Tiên"
+],
+"Lang Son": [
+    "Lạng Sơn", "Tràng Định", "Bình Gia", "Văn Lãng", "Cao Lộc",
+    "Văn Quan", "Bắc Sơn", "Hữu Lũng", "Chi Lăng", "Lộc Bình",
+    "Đình Lập"
+],
+"Lao Cai": [
+    "Lào Cai", "Bát Xát", "Mường Khương", "Si Ma Cai", "Bắc Hà",
+    "Bảo Thắng", "Bảo Yên", "Sa Pa", "Văn Bàn"
+],
+"Long An": [
+    "Tân An", "Kiến Tường", "Tân Hưng", "Vĩnh Hưng", "Mộc Hóa",
+    "Tân Thạnh", "Thạnh Hóa", "Đức Huệ", "Đức Hòa", "Bến Lức",
+    "Thủ Thừa", "Tân Trụ", "Cần Đước", "Cần Giuộc", "Châu Thành"
+],
+"Nam Dinh": [
+    "Nam Định", "Mỹ Lộc", "Vụ Bản", "Ý Yên", "Nghĩa Hưng",
+    "Nam Trực", "Trực Ninh", "Xuân Trường", "Giao Thủy", "Hải Hậu"
+],
+"Nghe An": [
+    "Vinh", "Cửa Lò", "Thái Hoà", "Quế Phong", "Quỳ Châu",
+    "Kỳ Sơn", "Tương Dương", "Nghĩa Đàn", "Quỳ Hợp", "Quỳnh Lưu",
+    "Con Cuông", "Tân Kỳ", "Anh Sơn", "Diễn Châu", "Yên Thành",
+    "Đô Lương", "Thanh Chương", "Nghi Lộc", "Nam Đàn", "Hưng Nguyên",
+    "Hoàng Mai"
+],
+"Ninh Binh": [
+    "Ninh Bình", "Tam Điệp", "Nho Quan", "Gia Viễn", "Hoa Lư",
+    "Yên Khánh", "Kim Sơn", "Yên Mô"
+],
+"Ninh Thuan": [
+    "Phan Rang-Tháp Chàm", "Bác Ái", "Ninh Sơn", "Ninh Hải",
+    "Ninh Phước", "Thuận Bắc", "Thuận Nam"
+],
+"Phu Tho": [
+    "Việt Trì", "Phú Thọ", "Đoan Hùng", "Hạ Hoà", "Thanh Ba",
+    "Phù Ninh", "Yên Lập", "Cẩm Khê", "Tam Nông", "Lâm Thao",
+    "Thanh Sơn", "Thanh Thuỷ", "Tân Sơn"
+],
+"Phu Yen": [
+    "Tuy Hoà", "Sông Cầu", "Đồng Xuân", "Tuy An", "Sơn Hòa",
+    "Sông Hinh", "Tây Hoà", "Phú Hoà", "Đông Hòa"
+],
+"Quang Binh": [
+    "Đồng Hới", "Minh Hóa", "Tuyên Hóa", "Quảng Trạch", "Bố Trạch",
+    "Quảng Ninh", "Lệ Thủy", "Ba Đồn"
+],
+"Quang Nam": [
+    "Tam Kỳ", "Hội An", "Tây Giang", "Đông Giang", "Nam Giang",
+    "Phước Sơn", "Nam Trà My", "Bắc Trà My", "Hiệp Đức", "Thăng Bình",
+    "Tiên Phước", "Bắc Bình", "Nam Bình", "Phú Ninh", "Nông Sơn",
+    "Đại Lộc", "Quế Sơn", "Duy Xuyên", "Nui Thành"
+],
+"Quang Ngai": [
+    "Quảng Ngãi", "Bình Sơn", "Trà Bồng", "Sơn Tịnh", "Sơn Hà",
+    "Tư Nghĩa", "Nghĩa Hành", "Minh Long", "Mộ Đức", "Đức Phổ",
+    "Ba Tơ", "Lý Sơn", "Sơn Tây", "Tây Trà"
+],
+"Quang Ninh": [
+    "Hạ Long", "Móng Cái", "Cẩm Phả", "Uông Bí", "Bình Liêu",
+    "Tiên Yên", "Đầm Hà", "Hải Hà", "Ba Chẽ", "Vân Đồn",
+    "Hoành Bồ", "Đông Triều", "Quảng Yên", "Cô Tô"
+],
+"Quang Tri": [
+    "Đông Hà", "Quảng Trị", "Vĩnh Linh", "Hướng Hóa", "Gio Linh",
+    "Đa Krông", "Cam Lộ", "Triệu Phong", "Hải Lăng", "Cồn Cỏ"
+],
+"Soc Trang": [
+    "Sóc Trăng", "Châu Thành", "Kế Sách", "Mỹ Tú", "Cù Lao Dung",
+    "Long Phú", "Mỹ Xuyên", "Ngã Năm", "Thạnh Trị", "Vĩnh Châu",
+    "Trần Đề"
+],
+"Son La": [
+    "Sơn La", "Quỳnh Nhai", "Thuận Châu", "Mường La", "Bắc Yên",
+    "Phù Yên", "Mai Sơn", "Sông Mã", "Yên Châu", "Mộc Châu",
+    "Sốp Cộp", "Vân Hồ"
+],
+"Tay Ninh": [
+    "Tây Ninh", "Tân Biên", "Tân Châu", "Dương Minh Châu", "Châu Thành",
+    "Hòa Thành", "Gò Dầu", "Bến Cầu", "Trảng Bàng"
+],
+"Thai Binh": [
+    "Thái Bình", "Quỳnh Phụ", "Hưng Hà", "Đông Hưng", "Thái Thụy",
+    "Tiền Hải", "Kiến Xương", "Vũ Thư"
+],
+        };
+        
+        const provinceSelect = document.getElementById('city-province');
+        const districtSelect = document.getElementById('district');
+        
+        provinceSelect.addEventListener('change', function() {
+            const selectedProvince = this.value;
+            districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+            
+            if (selectedProvince && districtData[selectedProvince]) {
+                districtData[selectedProvince].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // State management
+            let currentStep = 1;
+            const totalSteps = 3;
+            const tickets = [];
+            window.handleFormSubmit = handleFormSubmit;
+            // Get all necessary elements
+            const forms = {
+                1: document.getElementById('Form1'),
+                2: document.getElementById('Form2'),
+                3: document.getElementById('Form3')
+            };
+            
+            const nextBtn = document.getElementById('next-btn');
+            const backBtn = document.getElementById('back-btn');
+            
+            // Function to validate Form 1
+            function validateForm1() {
+                const eventName = document.getElementById('event-name').value;
+                const eventCategory = document.getElementById('event-category').value;
+                const startTime = document.getElementById('start-time').value;
+                const endTime = document.getElementById('end-time').value;
+                
+                if (!eventName) {
+                    alert('Please enter event name');
+                    return false;
+                }
+                if (!eventCategory) {
+                    alert('Please select event category');
+                    return false;
+                }
+                if (!startTime || !endTime) {
+                    alert('Please select event time');
+                    return false;
+                }
+                if (new Date(startTime) >= new Date(endTime)) {
+                    alert('End time must be after start time');
+                    return false;
+                }
+                return true;
+            }
+
+            // Function to validate Form 2
+            function validateForm2() {
+                if (tickets.length === 0) {
+                    alert('Please add at least one ticket type');
+                    return false;
+                }
+                return true;
+            }
+
+            // Function to show current form and hide others
+            function showForm(step) {
+                // Hide all forms
+                Object.values(forms).forEach(form => {
+                    form.classList.remove('form-active');
+                });
+                
+                // Show current form
+                forms[step].classList.add('form-active');
+                
+                // Update step indicators
+                updateStepIndicators(step);
+                
+                // Update button visibility
+                updateNavigationButtons(step);
+            }
+            
+            // Function to update step indicators
+            function updateStepIndicators(step) {
+                document.querySelectorAll('.step').forEach((stepElement, index) => {
+                    if (index + 1 <= step) {
+                        stepElement.classList.add('active');
+                    } else {
+                        stepElement.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Function to update navigation buttons
+            function updateNavigationButtons(step) {
+                backBtn.style.display = step === 1 ? 'none' : 'inline-block';
+                nextBtn.textContent = step === totalSteps ? 'Submit' : 'Next';
+            }
+            
+            // Function to handle form submission
+            async function handleFormSubmit() {
+              try {
+                  // Lấy các file ảnh
+                  const logoInput = document.getElementById('logo-image');
+                  const bannerInput = document.getElementById('banner-image');
+                  const organizerLogoInput = document.getElementById('organizer-logo');
+          
+                  // Convert images to base64
+                  const eventLogo = logoInput.files[0] ? await convertToBase64(logoInput.files[0]) : null;
+                  const eventBanner = bannerInput.files[0] ? await convertToBase64(bannerInput.files[0]) : null;
+                  const organizerLogo = organizerLogoInput.files[0] ? await convertToBase64(organizerLogoInput.files[0]) : null;
+          
+                  // Collect form data according to Event model structure
+                  const formData = {
+                      title: document.getElementById('event-name').value,
+                      eventType: document.querySelector('input[name="event-type"]:checked')?.value,
+                      
+                      // Images
+                      eventLogo: eventLogo,
+                      eventBanner: eventBanner,
+                      
+                      // Venue information
+                      // venue: {
+                      //     name: document.getElementById('venue-name').value,
+                      //     cityProvince: document.getElementById('city-province').value,
+                      //     district: document.getElementById('district').value,
+                      //     details: document.getElementById('event-details').value
+                      // },
+                      venueName: document.getElementById('venue-name').value,
+                      addressProvince: document.getElementById('city-province').value,
+                      addressDetail: document.getElementById('event-details').value,
+                      district: document.getElementById('district').value,
+                      
+                      // Event details
+                      category: document.getElementById('event-category').value,
+                      description: document.getElementById('description').value,
+                      startDate: new Date(document.getElementById('start-time').value),
+                      endDate: new Date(document.getElementById('end-time').value),
+                      
+                      // Organizer information
+                      organizer: {
+                          name: document.getElementById('event-organizer').value,
+                          logo: organizerLogo,
+                          description: document.getElementById('organizer-description').value
+                      },
+                      
+                      // Ticket information
+                      ticketType: tickets.map(ticket => ({
+                          name: ticket.name,
+                          price: parseFloat(ticket.price),
+                          quantity: parseInt(ticket.total),
+                          description: ticket.description
+                      })),
+                      
+                      // Settings from Form 3
+                      settings: {
+                          maxTicketsPerUser: parseInt(document.getElementById('maxTicketsPerUser').value),
+                          visibility: document.getElementById('ticketVisibility').value,
+                          enableWaitlist: document.getElementById('enableWaitlist').checked,
+                          paymentMethods: Array.from(
+                              document.querySelectorAll('input[name="paymentMethods"]:checked')
+                          ).map(input => input.value)
+                      },
+                      
+                      // Meta information
+                      status: 'draft',
+                      createdAt: new Date(),
+                      updatedAt: new Date()
+                  };
+                  console.log('Form data:', formData);
+                  // Send data to server
+                  const response = await fetch('/admin', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(formData)
+                  });
+          
+                  if (!response.ok) {
+                      const errorData = await response.json();
+                      throw new Error(errorData.message || 'Failed to save event');
+                  }
+          
+                  const result = await response.json();
+                  console.log('Event saved successfully:', result);
+                  alert('Event created successfully!');
+                  
+                  // Optional: Reset form or redirect
+                  window.location.href = `/detail/${result.data._id}`;
+          
+              } catch (error) {
+                  console.error('Error saving event:', error);
+                  alert('Error creating event: ' + error.message);
+              }
+          }
+          
+          // Helper function to convert file to base64
+          function convertToBase64(file) {
+              return new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(file);
+                  reader.onload = () => resolve(reader.result);
+                  reader.onerror = error => reject(error);
+              });
+          }
+            
+            // Event listener for Next button
+            nextBtn.addEventListener('click', function() {
+                if (currentStep < totalSteps) {
+                    // Validate current form before proceeding
+                    let isValid = true;
+                    if (currentStep === 1) {
+                        isValid = validateForm1();
+                    } else if (currentStep === 2) {
+                        isValid = validateForm2();
+                    }
+
+                    if (isValid) {
+                        currentStep++;
+                        showForm(currentStep);
+                    }
+                } else {
+                    handleFormSubmit();
+                }
+            });
+            
+            // Event listener for Back button
+            backBtn.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showForm(currentStep);
+                }
+            });
+
+            // Ticket management functions
+            function addTicket() {
+                const ticketName = document.getElementById('ticketName').value;
+                const ticketPrice = document.getElementById('freeTicket').checked ? 0 : document.getElementById('ticketPrice').value;
+                const totalTickets = document.getElementById('totalTickets').value;
+                const ticketDescription = document.getElementById('ticketDescription').value;
+
+                if (!ticketName || (!document.getElementById('freeTicket').checked && !ticketPrice) || !totalTickets || !ticketDescription) {
+                    alert('Please fill all required fields');
+                    return;
+                }
+
+                const ticket = {
+                    name: ticketName,
+                    price: ticketPrice,
+                    total: totalTickets,
+                    description: ticketDescription
+                };
+
+                tickets.push(ticket);
+                updateTicketList();
+                clearTicketForm();
+                document.getElementById('addTicketForm').style.display = 'none';
+                // Clear ticket form inputs
+                document.getElementById('ticketName').value = '';
+                document.getElementById('ticketPrice').value = '';
+                document.getElementById('totalTickets').value = '';
+                document.getElementById('ticketDescription').value = '';
+                document.getElementById('freeTicket').checked = false;
+            }
+
+            function updateTicketList() {
+                const ticketList = document.getElementById('ticketList');
+                ticketList.innerHTML = '';
+
+                tickets.forEach((ticket, index) => {
+                    const ticketElement = document.createElement('div');
+                    ticketElement.className = 'ticket-item';
+                    ticketElement.innerHTML = `
+                        <h3>${ticket.name}</h3>
+                        <p>Price: ${ticket.price === 0 ? 'Free' : `$${ticket.price}`}</p>
+                        <p>Total Tickets: ${ticket.total}</p>
+                        <p>Description: ${ticket.description}</p>
+                        <button onclick="removeTicket(${index})" class="remove-ticket">Remove</button>
+                    `;
+                    ticketList.appendChild(ticketElement);
+                });
+            }
+
+            function removeTicket(index) {
+                tickets.splice(index, 1);
+                updateTicketList();
+            }
+
+            function clearTicketForm() {
+                const form = document.getElementById('ticketForm');
+                if (form) {
+                    form.reset();
+                }
+            }
+
+            // Initialize form and add event listeners for ticket management
+            function initializeTicketManagement() {
+                const addTicketBtn = document.getElementById('addTicketBtn');
+                const addTicketForm = document.getElementById('addTicketForm');
+                const saveTicketBtn = document.getElementById('saveTicket');
+                const cancelFormBtn = document.getElementById('cancelForm');
+                const freeTicketCheckbox = document.getElementById('freeTicket');
+                const ticketPriceInput = document.getElementById('ticketPrice');
+
+                if (addTicketBtn && addTicketForm) {
+                    addTicketBtn.addEventListener('click', function() {
+                        addTicketForm.style.display = 'block';
+                    });
+                }
+
+                if (saveTicketBtn) {
+                    saveTicketBtn.addEventListener('click', addTicket);
+                }
+
+                if (cancelFormBtn) {
+                    cancelFormBtn.addEventListener('click', function() {
+                        addTicketForm.style.display = 'none';
+                        clearTicketForm();
+                    });
+                }
+
+                if (freeTicketCheckbox && ticketPriceInput) {
+                    freeTicketCheckbox.addEventListener('change', function() {
+                        ticketPriceInput.disabled = this.checked;
+                        if (this.checked) {
+                            ticketPriceInput.value = '';
+                        }
+                    });
+                }
+            }
+
+            // Initialize image preview functionality
+            function initializeImagePreviews() {
+                ['logo-image', 'banner-image', 'organizer-logo'].forEach(id => {
+                    const imageInput = document.getElementById(id);
+                    if (imageInput) {
+                        imageInput.addEventListener('change', function(event) {
+                            const file = event.target.files[0];
+                            if (file) {
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    const previewId = id === 'organizer-logo' ? 'organizer-logo-preview' : `${id}-preview`;
+                                    const img = document.getElementById(previewId);
+                                    if (img) {
+                                        img.src = e.target.result;
+                                        img.style.display = 'block';
+                                    }
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Add CSS styles for ticket items
+            const style = document.createElement('style');
+            style.textContent = `
+                .ticket-item {
+                    border: 1px solid #ddd;
+                    padding: 15px;
+                    margin: 10px 0;
+                    border-radius: 5px;
+                }
+                .ticket-item h3 {
+                    margin: 0 0 10px 0;
+                }
+                .ticket-item p {
+                    margin: 5px 0;
+                }
+                .remove-ticket {
+                    background-color: #ff4444;
+                    color: white;
+                    border: none;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                    cursor: pointer;
+                }
+                .remove-ticket:hover {
+                    background-color: #cc0000;
+                }
+                .add-ticket-form {
+                    border: 1px solid #ddd;
+                    padding: 20px;
+                    margin-top: 20px;
+                    border-radius: 5px;
+                }
+                .save-btn, .cancel-btn {
+                    padding: 8px 15px;
+                    margin: 10px 5px;
+                    border: none;
+                    border-radius: 3px;
+                    cursor: pointer;
+                }
+                .save-btn {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+                .cancel-btn {
+                    background-color: #f44336;
+                    color: white;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Initialize everything
+            showForm(1);
+            initializeTicketManagement();
+            initializeImagePreviews();
+
+            // Make removeTicket function available globally
+            window.removeTicket = removeTicket;
+        });
+    </script>
+</body>
+</html>

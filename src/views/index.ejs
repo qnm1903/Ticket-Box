@@ -1,0 +1,795 @@
+<%- include('head', { active: 'home' }) -%>
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+  <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% events.forEach((event, index) => { %>
+        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+          <img
+                  class="w-100 img-fluid fixed-size"
+                  src=<%= event.imgURL %>
+                  alt="Image"
+          />
+          <div class="carousel-caption">
+            <div class="hero-container">
+              <div class="container">
+                <div class="row justify-content-start">
+                  <div class="col-lg-7">
+                    <h1 class="display-2 mb-5 animated slideInDown">
+                      <%= event.title %>
+                    </h1>
+                    <a
+                            href=""
+                            class="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                    >See review</a
+                    >
+                    <a
+                            href=""
+                            class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                    >Book Ticket</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+      <!-- <div class="carousel-item active">
+        <img class="w-100" src="/img/hero/us_poster.png" alt="Image" />
+        <div class="carousel-caption">
+          <div class="hero-container">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-lg-7">
+                  <h1 class="display-2 mb-5 animated slideInDown">
+                    US (2019)
+                  </h1>
+                  <a
+                          href=""
+                          class="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                  >See review</a
+                  >
+                  <a
+                          href=""
+                          class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                  >Book Ticket</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img
+                class="w-100"
+                src="/img/hero/death_whisperer_poster.jpg"
+                alt="Image"
+        />
+        <div class="carousel-caption">
+          <div class="hero-container">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-lg-7">
+                  <h1 class="display-2 mb-5 animated slideInDown">
+                    DEATH WHISPERER (2023)
+                  </h1>
+                  <a
+                          href=""
+                          class="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                  >See review</a
+                  >
+                  <a
+                          href=""
+                          class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                  >Book Ticket</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="w-100" src="/img/hero/smile_poster.jpg" alt="Image" />
+        <div class="carousel-caption">
+          <div class="hero-container">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-lg-7">
+                  <h1 class="display-2 mb-5 animated slideInDown">
+                    SMILE (2022)
+                  </h1>
+                  <a
+                          href=""
+                          class="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                  >See review</a
+                  >
+                  <a
+                          href=""
+                          class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                  >Book Ticket</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="w-100" src="/img/hero/venom3_poster.jpg" alt="Image" />
+        <div class="carousel-caption">
+          <div class="hero-container">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-lg-7">
+                  <h1 class="display-2 mb-5 animated slideInDown">
+                    Venom: The Last Dance <strong>(2024)</strong>
+                  </h1>
+                  <a
+                          href=""
+                          class="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                  >See review</a
+                  >
+                  <a
+                          href=""
+                          class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                  >Book Ticket</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#header-carousel"
+            data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#header-carousel"
+            data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<!-- Carousel End -->
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+        <div class="about-img position-relative overflow-hidden p-5 pe-0">
+          <img class="img-fluid w-100" src="/img/intro_section.jpg" />
+        </div>
+      </div>
+      <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+        <h1 class="display-5 mb-4">Experience Venues, Reimagined</h1>
+        <p class="mb-4">
+          Step into a new era of event experiences with <strong>TicketZen</strong>. Our intuitive platform simplifies 
+          online ticket booking, enabling you to easily choose your favorite concerts, sports events, or art performances,
+          select the perfect seats, and secure your spot in just a few clicks. Enjoy exclusive benefits like early bird discounts,
+          loyalty rewards, and tailored recommendations based on your preferences. With <strong>TicketZen</strong>,
+          you can effortlessly reserve your tickets and immerse yourself in unforgettable moments of music, sports, and art.
+        </p>
+        <p>
+          <i class="fa fa-check text-divider me-3"></i>Easy and Intuitive
+          Booking
+        </p>
+        <p>
+          <i class="fa fa-check text-divider me-3"></i>Wide Range of Events
+        </p>
+        <p>
+          <i class="fa fa-check text-divider me-3"></i>Real-time Seat
+          Selection
+        </p>
+        <a class="btn btn-divider rounded-pill py-3 px-5 mt-3" href="/about"
+        >Read More</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- About End -->
+
+<!-- Feature Start -->
+<div class="container-fluid bg-black-50 bg-icon my-5 py-6">
+  <div class="container">
+    <div
+            class="section-header text-center mx-auto mb-5 wow fadeInUp"
+            data-wow-delay="0.1s"
+            style="max-width: 500px"
+    >
+      <h1 class="display-5 mb-3">Our Features</h1>
+      <p>
+        Seamlessly book your movie tickets, choose your seats, and enjoy
+        exclusive perks. Your cinematic adventure starts here.
+      </p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="bg-white text-center h-100 p-4 p-xl-5">
+          <img
+                  class="img-fluid mb-4"
+                  src="/img/feature/seamless_booking.svg"
+                  alt=""
+          />
+          <h4 class="mb-3 text-body">Seamless Booking</h4>
+          <p class="mb-4">
+            Effortlessly select your movie, showtime, and seats with our
+            user-friendly interface.
+          </p>
+          <a
+                  class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill"
+                  href="/404"
+          >Read More</a
+          >
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="bg-white text-center h-100 p-4 p-xl-5">
+          <img
+                  class="img-fluid mb-4"
+                  src="img/feature/personalized.svg"
+                  alt=""
+          />
+          <h4 class="mb-3 text-body">Personalized Experience</h4>
+          <p class="mb-4">
+            Enjoy tailored movie recommendations and exclusive offers based
+            on your preferences.
+          </p>
+          <a
+                  class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill"
+                  href="/404"
+          >Read More</a
+          >
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+        <div class="bg-white text-center h-100 p-4 p-xl-5">
+          <img class="img-fluid mb-4" src="/img/feature/phone.svg" alt="" />
+          <h4 class="mb-3 text-body">Mobile-Friendly Access</h4>
+          <p class="mb-4">
+            Book tickets on the go with our mobile-optimized platform.
+          </p>
+          <a
+                  class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill"
+                  href="/404"
+          >Read More</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Feature End -->
+
+<!-- Product Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-0 gx-5 align-items-end">
+      <div class="col-lg-6">
+        <div
+                class="section-header text-start mb-5 wow fadeInUp"
+                data-wow-delay="0.1s"
+                style="max-width: 500px"
+        >
+          <h1 class="display-5 mb-3">Now Showing</h1>
+          <p>
+            Discover the latest blockbusters and indie gems. Book your
+            tickets now and experience the magic of cinema.
+          </p>
+        </div>
+      </div>
+      <div
+              class="col-lg-6 text-start text-lg-end wow slideInRight"
+              data-wow-delay="0.1s"
+      >
+        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+          <li class="nav-item me-2">
+            <a
+                    class="btn btn-outline-divider border-2 active"
+                    data-bs-toggle="pill"
+                    href="#tab-1"
+            >Hot New Release</a
+            >
+          </li>
+          <li class="nav-item me-2">
+            <a
+                    class="btn btn-outline-divider border-2"
+                    data-bs-toggle="pill"
+                    href="#tab-2"
+            >Music
+            </a>
+          </li>
+          <li class="nav-item me-0">
+            <a
+                    class="btn btn-outline-divider border-2"
+                    data-bs-toggle="pill"
+                    href="#tab-3"
+            >Art</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div class="row g-4">
+          <% if (typeof newReleaseEvents !== 'undefined' && newReleaseEvents) { %>
+
+          <% newReleaseEvents.forEach((event, index) => { %>
+            <div
+                    class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                    data-wow-delay="0.1s"
+            >
+              <div class="product-item">
+                <div class="position-relative bg-light overflow-hidden">
+                  <img
+                          class="img-fluid w-100 golden-ratio-v fixed-size"
+                          src="<%= event.imgURL %>"
+                          alt=""
+                  />
+                  <div
+                          class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                  >
+                    Hot
+                  </div>
+                </div>
+                <div class="text-center p-4">
+                  <a class="d-block h5 mb-2" href="/detail/<%= event._id %>" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><%= event.title %></a>
+                  <p class="text-clamp" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><%= event.addressDetail %>, <%= event.addressProvince %></p>
+                </div>
+                <div class="d-flex border-top">
+                  <small class="w-50 text-center border-end py-2">
+                    <a class="text-body" href="/detail/<%= event._id %>"
+                    ><i class="fa fa-info circle text-primary me-2"></i>View
+                      detail</a
+                    >
+                  </small>
+                  <small class="w-50 text-center py-2">
+                    <div class="text-body"
+                    ><i class="fa fa-eye text-primary me-2"></i><%= event.visitCount %></div>
+                  </small>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+            <% } %>
+          <!-- <div
+                  class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                  data-wow-delay="0.1s"
+          >
+            <div class="product-item">
+              <div class="position-relative bg-light overflow-hidden">
+                <img
+                        class="img-fluid w-100 golden-ratio-v"
+                        src="/img/product/us.jpg"
+                        alt=""
+                />
+                <div
+                        class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                >
+                  Hot
+                </div>
+              </div>
+              <div class="text-center p-4">
+                <a class="d-block h5 mb-2" href="/detail">US</a>
+                <p class="text-clamp">
+                  Adelaide Wilson and her family are attacked by mysterious
+                  figures dressed in red. Upon closer inspection, the
+                  Wilsons realise that the intruders are exact lookalikes of
+                  them.
+                </p>
+              </div>
+              <div class="d-flex border-top">
+                <small class="w-50 text-center border-end py-2">
+                  <a class="text-body" href="/detail"
+                  ><i class="fa fa-eye text-primary me-2"></i>View
+                    detail</a
+                  >
+                </small>
+                <small class="w-50 text-center py-2">
+                  <a class="text-body" href=""
+                  ><i class="fa fa-shopping-bag text-primary me-2"></i>Add
+                    to cart</a
+                  >
+                </small>
+              </div>
+            </div>
+          </div>
+          <div
+                  class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                  data-wow-delay="0.3s"
+          >
+            <div class="product-item">
+              <div class="position-relative bg-light overflow-hidden">
+                <img
+                        class="img-fluid w-100 golden-ratio-v"
+                        src="/img/product/death_whisperer.jpg"
+                        alt=""
+                />
+                <div
+                        class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                >
+                  New
+                </div>
+              </div>
+              <div class="text-center p-4">
+                <a class="d-block h5 mb-2" href="/detail">Death Whisperer</a>
+                <p class="text-clamp">
+                  After the elder brother returns to his hometown, he must
+                  find a way to save his younger sister from a bizarre
+                  illness that is causing her to behave differently.
+                </p>
+              </div>
+              <div class="d-flex border-top">
+                <small class="w-50 text-center border-end py-2">
+                  <a class="text-body" href="/detail"
+                  ><i class="fa fa-eye text-primary me-2"></i>View
+                    detail</a
+                  >
+                </small>
+                <small class="w-50 text-center py-2">
+                  <a class="text-body" href=""
+                  ><i class="fa fa-shopping-bag text-primary me-2"></i>Add
+                    to cart</a
+                  >
+                </small>
+              </div>
+            </div>
+          </div>
+          <div
+                  class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                  data-wow-delay="0.5s"
+          >
+            <div class="product-item">
+              <div class="position-relative bg-light overflow-hidden">
+                <img
+                        class="img-fluid w-100 golden-ratio-v"
+                        src="/img/product/mai.jpg"
+                        alt=""
+                />
+                <div
+                        class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                >
+                  New
+                </div>
+              </div>
+              <div class="text-center p-4">
+                <a class="d-block h5 mb-2" href="/detail">MAI</a>
+                <p class="text-clamp">
+                  A Vietnamese woman has endured many difficulties in her
+                  life. When she meets her neighbour, they develop feelings
+                  for each other.
+                </p>
+              </div>
+              <div class="d-flex border-top">
+                <small class="w-50 text-center border-end py-2">
+                  <a class="text-body" href="/detail"
+                  ><i class="fa fa-eye text-primary me-2"></i>View
+                    detail</a
+                  >
+                </small>
+                <small class="w-50 text-center py-2">
+                  <a class="text-body" href=""
+                  ><i class="fa fa-shopping-bag text-primary me-2"></i>Add
+                    to cart</a
+                  >
+                </small>
+              </div>
+            </div>
+          </div>
+          <div
+                  class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                  data-wow-delay="0.7s"
+          >
+            <div class="product-item">
+              <div class="position-relative bg-light overflow-hidden">
+                <img
+                        class="img-fluid w-100 golden-ratio-v"
+                        src="/img/product/how_to_make_millions_before_grandma_dies.jpg"
+                        alt=""
+                />
+                <div
+                        class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                >
+                  New
+                </div>
+              </div>
+              <div class="text-center p-4">
+                <a class="h5 mb-2 text-clamp-1" href="/detail"
+                >How to Make Millions Before Grandma Dies</a
+                >
+                <p class="text-clamp">
+                  A man quits work to care for his dying grandmother,
+                  motivated by her fortune. He schemes to win her favour
+                  before she passes.
+                </p>
+              </div>
+              <div class="d-flex border-top">
+                <small class="w-50 text-center border-end py-2">
+                  <a class="text-body" href="/detail"
+                  ><i class="fa fa-eye text-primary me-2"></i>View
+                    detail</a
+                  >
+                </small>
+                <small class="w-50 text-center py-2">
+                  <a class="text-body" href=""
+                  ><i class="fa fa-shopping-bag text-primary me-2"></i>Add
+                    to cart</a
+                  >
+                </small>
+              </div>
+            </div>
+          </div> -->
+
+          <div
+                  class="col-12 text-center wow fadeInUp"
+                  data-wow-delay="0.1s"
+          >
+            <a class="btn btn-divider rounded-pill py-3 px-5" href="/product"
+            >Browse More Movies</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="tab-2" class="tab-pane fade show p-0">
+        <div class="row g-4">
+          <% if (typeof musicEvents !== 'undefined' && musicEvents) { %>
+
+          <% musicEvents.forEach((event, index) => { %>
+            <div
+                    class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                    data-wow-delay="0.1s"
+            >
+              <div class="product-item">
+                <div class="position-relative bg-light overflow-hidden">
+                  <img
+                          class="img-fluid w-100 golden-ratio-v"
+                          src="<%= event.imgURL %>"
+                          alt=""
+                  />
+                  <div
+                          class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                  >
+                    Hot
+                  </div>
+                </div>
+                <div class="text-center p-4">
+                  <a class="d-block h5 mb-2" href="/detail/<%= event._id %>" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><%= event.title %></a>
+                  <p class="text-clamp" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><%= event.addressDetail %>, <%= event.addressProvince %></p>
+                </div>
+                <div class="d-flex border-top">
+                  <small class="w-50 text-center border-end py-2">
+                    <a class="text-body" href="/detail/<%= event._id %>"
+                    ><i class="fa fa-eye text-primary me-2"></i>View
+                      detail</a
+                    >
+                  </small>
+                  <small class="w-50 text-center py-2">
+                    <a class="text-body" href=""
+                    ><i class="fa fa-shopping-bag text-primary me-2"></i>Add
+                      to cart</a
+                    >
+                  </small>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+            <% } %>
+          <div class="col-12 text-center">
+            <a class="btn btn-divider rounded-pill py-3 px-5" href="/product"
+            >Browse More Movies</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="tab-3" class="tab-pane fade show p-0">
+        <div class="row g-4">
+          <% if (typeof artEvents !== 'undefined' && artEvents) { %>
+          <% artEvents.forEach((event, index) => { %>
+            <div
+                    class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                    data-wow-delay="0.1s"
+            >
+              <div class="product-item">
+                <div class="position-relative bg-light overflow-hidden">
+                  <img
+                          class="img-fluid w-100 golden-ratio-v"
+                          src="<%= event.imgURL %>"
+                          alt=""
+                  />
+                  <div
+                          class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                  >
+                    Hot
+                  </div>
+                </div>
+                <div class="text-center p-4">
+                  <a class="d-block h5 mb-2" href="/detail/<%= event._id %>" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><%= event.title %></a>
+                  <p class="text-clamp" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><%= event.addressDetail %>, <%= event.addressProvince %></p>
+                </div>
+                <div class="d-flex border-top">
+                  <small class="w-50 text-center border-end py-2">
+                    <a class="text-body" href="/detail/<%= event._id %>"
+                    ><i class="fa fa-eye text-primary me-2"></i>View
+                      detail</a
+                    >
+                  </small>
+                  <small class="w-50 text-center py-2">
+                    <a class="text-body" href=""
+                    ><i class="fa fa-shopping-bag text-primary me-2"></i>Add
+                      to cart</a
+                    >
+                  </small>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+            <% } %>
+          <div class="col-12 text-center">
+            <a
+                    class="btn btn-divider rounded-pill py-3 px-5"
+                    href="/product"
+            >Browse More Movies</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product End -->
+
+<!-- Firm Visit Start -->
+<div class="container-fluid bg-black-50 bg-icon mt-5 py-6">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
+        <h1 class="display-5 text-white mb-3">
+          Ready to dive into the cinematic experience?
+        </h1>
+        <p class="text-white mb-0">
+          Book your tickets now and immerse yourself in a world of
+          storytelling and entertainment. With just a few clicks, you can
+          secure your seat, choose your showtime, and indulge in the magic
+          of the silver screen. Don't miss out on the latest blockbusters
+          and timeless classics. Book your tickets today!
+        </p>
+      </div>
+      <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
+        <a
+                class="btn btn-lg btn-secondary rounded-pill py-3 px-5"
+                href="/product"
+        >Visit Now</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Firm Visit End -->
+
+<!-- Testimonial Start -->
+<div class="container-fluid bg-primary bg-icon py-6 mb-5">
+  <div class="container">
+    <div
+            class="section-header text-center mx-auto mb-5 wow fadeInUp"
+            data-wow-delay="0.1s"
+            style="max-width: 500px"
+    >
+      <h1 class="display-5 mb-3">Customer Review</h1>
+      <p>
+        Discover why our customers love <h6 class="d-inline-flex">TicketZ<span class="text-divider">en</span></h6>. Read authentic reviews
+      from real people and see why we're the top choice for online movie
+      ticket booking.
+      </p>
+    </div>
+    <div
+            class="owl-carousel testimonial-carousel wow fadeInUp"
+            data-wow-delay="0.1s"
+    >
+      <div class="testimonial-item position-relative bg-white p-5 mt-4">
+        <i
+                class="fa fa-quote-left fa-3x text-divider position-absolute top-0 start-0 mt-n4 ms-5"
+        ></i>
+        <p class="mb-4 text-clamp">
+          The customer service is top-notch. I had a small issue with my
+          booking, and they resolved it quickly and efficiently. I'll
+          definitely be using this website again and again.
+        </p>
+        <div class="d-flex align-items-center">
+          <img
+                  class="flex-shrink-0 rounded-circle"
+                  src="/img/testimonial-1.jpg"
+                  alt=""
+          />
+          <div class="ms-3">
+            <h5 class="mb-1 text-divider">Sarah Kim</h5>
+            <span>Teacher</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-item position-relative bg-white p-5 mt-4">
+        <i
+                class="fa fa-quote-left fa-3x text-divider position-absolute top-0 start-0 mt-n4 ms-5"
+        ></i>
+        <p class="mb-4 text-clamp">
+          I love using <strong>TicketZen</strong>! It's so easy to find the latest movies and
+          book tickets. The seat selection process is a breeze, and I always
+          find great deals.
+        </p>
+        <div class="d-flex align-items-center">
+          <img
+                  class="flex-shrink-0 rounded-circle"
+                  src="/img/testimonial-2.jpg"
+                  alt=""
+          />
+          <div class="ms-3">
+            <h5 class="mb-1 text-divider">Alex Turner</h5>
+            <span>Software Engineer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-item position-relative bg-white p-5 mt-4">
+        <i
+                class="fa fa-quote-left fa-3x text-divider position-absolute top-0 start-0 mt-n4 ms-5"
+        ></i>
+        <p class="mb-4 text-clamp">
+          This is the best movie ticket booking website I've used. The
+          interface is sleek, and the app is super convenient. I've saved a
+          lot of time and effort with their personalized recommendations.
+        </p>
+        <div class="d-flex align-items-center">
+          <img
+                  class="flex-shrink-0 rounded-circle"
+                  src="/img/testimonial-3.jpg"
+                  alt=""
+          />
+          <div class="ms-3">
+            <h5 class="mb-1 text-divider">Mia Thompson</h5>
+            <span>Marketing Manager</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-item position-relative bg-white p-5 mt-4">
+        <i
+                class="fa fa-quote-left fa-3x text-divider position-absolute top-0 start-0 mt-n4 ms-5"
+        ></i>
+        <p class="mb-4 text-clamp">
+          I'm a big movie buff, and <strong>TicketZen</strong> is my go-to for all my
+          cinematic needs. The loyalty program is fantastic, and I've
+          already earned free tickets! Highly recommend.
+        </p>
+        <div class="d-flex align-items-center">
+          <img
+                  class="flex-shrink-0 rounded-circle"
+                  src="/img/testimonial-4.jpg"
+                  alt=""
+          />
+          <div class="ms-3">
+            <h5 class="mb-1 text-divider">David Lee</h5>
+            <span>Film Critic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Testimonial End -->
+
+<!-- Footer Start -->
+<%-include('foot')-%>

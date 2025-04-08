@@ -1,0 +1,125 @@
+:root {
+    --black-color: #000; /* Tạo biến màu đen */
+    --white-color: #fff; /* Tạo biến màu trắng */
+}
+
+
+#loginPopup {
+    display: none; 
+    position: fixed; 
+    top: 0; /* Căn trên cùng của màn hình */
+    left: 0; /* Căn bên trái của màn hình */
+    width: 100%;
+    height: 100%;
+    z-index: 1000; 
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ cho overlay */
+    justify-content: center; 
+    align-items: center; 
+}
+
+.popup-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../images/login_background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* width: 496px; 
+    height: 598px;  */
+    width: 650px;
+    height: 700px;
+    padding: 2rem;
+}
+
+
+.loginRegister-heading {
+    font-family: 'Georgia', serif;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--black-color); /* Áp dụng biến màu đen */
+    margin-bottom: 2rem;
+}
+
+.inputBox {
+    position: relative;
+    margin: 1.5rem 0;
+    width: 100%;
+    border-bottom: 2px solid var(--white-color);
+}
+
+.inputBox input {
+    width: 350px;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: var(--black-color);
+}
+
+.inputBox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.inputBox button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(230, 225, 189);
+    border: none;
+    outline: none;
+}
+
+/* Hiệu ứng nhãn nổi */
+.inputBox input:focus + label,
+.inputBox input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s; /* Thêm hiệu ứng chuyển màu */
+}
+
+.submitButton:hover {
+    background-color: rgba(245, 245, 245, 0.9);
+}
+
+.forget,
+.Login_Register {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--black-color); /* Đổi màu chữ sang trắng */
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.forget a,
+.Login_Register a {
+    font-weight: 700;
+    color: var(--black-color); /* Đổi màu liên kết sang trắng */
+    text-decoration: underline;
+    cursor: pointer;
+}

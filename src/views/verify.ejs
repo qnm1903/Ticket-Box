@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TicketZen - Signup</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/login_register.css" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+</head>
+<body>
+<div class="container-fluid login-page">
+    <!-- Form xác minh tài khoản -->
+    <form action="/verify" method="post">
+    <div class="verification-box" id="verificationBox" style="display: block;">
+        <div class="logo-section">
+            <h2 class="fw-bold text-accent">Verify Your Account</h2>
+            <p class="subtitle">Enter the 6-digit code sent to your email</p>
+        </div>
+        <form id="verificationForm" class="verification-form">
+            <div class="form-group">
+                <div class="input-group">
+              <span class="input-icon">
+                <i class="fas fa-key"></i>
+              </span>
+                    <input
+                            type="text"
+                            id="verification-code"
+                            name="verification_code"
+                            placeholder="Enter 6-digit code"
+                            pattern="\d{6}"
+                            required
+                    />
+                </div>
+            </div>
+            <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+                <p class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> <%= errorMessage %>
+                </p>
+            <% } %>
+            <button class="login-btn" type="submit">
+                Verify <i class="fas fa-check"></i>
+            </button>
+        </form>
+        <p class="resend-link">
+            Didn't get the code? <a href="#" id="resendCode">Resend</a>
+        </p>
+    </div>
+    </form>
+</div>
+
+</body>
+<script>
+    document.getElementById('resendCode').addEventListener('click', async (event) => {
+        event.preventDefault(); // Ngăn chặn tải lại trang
+        const response = await fetch('/resend-code', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert('A new verification code has been sent to your email.');
+        } else {
+            alert(`Failed to resend code: ${result.message}`);
+        }
+    });
+</script>
+
+</html>

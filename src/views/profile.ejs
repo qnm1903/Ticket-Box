@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TicketZen - Edit Profile</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile.css">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+</head>
+<body>
+<div class="profile-box">
+    <h1>Edit Your Profile</h1>
+    <form action="/profile" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*" />
+
+            <% if (customer.avatar) { %>
+                <img src="<%= customer.avatar %>" alt="Avatar" style="width: 100px; height: 100px; margin-top: 10px;" />
+            <% } %>
+        </div>
+
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    class="form-control"
+                    value="<%= customer.fullName%>"
+                    placeholder="Enter your full name"
+            />
+        </div>
+        <div class="form-group">
+            <label for="DOB">Date of Birth</label>
+            <input
+                    type="date"
+                    id="DOB"
+                    name="DOB"
+                    class="form-control"
+                    value="<%= customer.DOB ? customer.DOB.toISOString().split('T')[0] : '' %>"
+            />
+        </div>
+        <div class="form-group">
+            <label for="gender" >Gender</label>
+            <select id="gender" name="gender" class="form-control" style="background: rgba(255, 255, 255, 0.05)">
+                <option value="Male" <%= customer.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                <option value="Female" <%= customer.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                <option value="Other" <%= customer.gender === 'Other' ? 'selected' : '' %>>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    class="form-control"
+                    value="<%= customer.address %>"
+                    placeholder="Enter your address"
+            />
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="form-control"
+                    value="<%= customer.phone || '' %>"
+                    placeholder="Enter your phone number"
+            />
+        </div>
+        <div class="form-group">
+            <label for="email" >Email</label>
+            <input
+                    style="background: rgba(255, 255, 255, 0.05)"
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    value="<%= customer.email%>"
+                    placeholder="Enter your email"
+                    readonly
+            />
+        </div>
+        <button type="submit" class="btn-primary">Save Changes</button>
+    </form>
+    <div class="back-to-home">
+        <a href="/">Back to Home</a>
+    </div>
+    <div class="back-to-home">
+        <a href="/logout">Log out</a>
+    </div>
+</div>
+</body>
+</html>

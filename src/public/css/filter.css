@@ -1,0 +1,34 @@
+.form-select, .form-control {
+    height: 45px;
+    font-size: 14px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group .form-control {
+    max-width: 150px;
+}
+
+.input-group .btn {
+    margin-left: 5px;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.product-item .text-center a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.margin-bottom{
+    margin-bottom: 2rem
+}

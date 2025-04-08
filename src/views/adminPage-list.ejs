@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Box - Admin Voucher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    /* Keep your existing CSS styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navigation {
+      padding: 20px;
+      background-color: #343a40;
+      display: flex;
+      gap: 10px;
+    }
+
+    .navigation button {
+      background-color: #495057;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .navigation button:hover {
+      background-color: #6c757d;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .voucher-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+
+    .voucher-list table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .voucher-list th,
+    .voucher-list td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .voucher-list th {
+      background-color: #f8f9fa;
+      font-weight: 500;
+    }
+
+    .voucher-status-active {
+      color: #198754;
+      font-weight: 500;
+    }
+
+    .voucher-status-expired {
+      color: #dc3545;
+      font-weight: 500;
+    }
+
+    .filter-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .pagination button:hover {
+      background-color: #f8f9fa;
+    }
+
+    .pagination button.active {
+      background-color: #0d6efd;
+      color: white;
+      border-color: #0d6efd;
+    }
+  </style>
+</head>
+<body>
+  <%- include('admin-head') -%>
+
+  <div class="navigation">
+    <button onclick="showCreateVoucher()">Create Voucher</button>
+    <button onclick="showVoucherList()">Voucher List</button>
+  </div>
+
+  <div class="container">
+    <!-- Create Voucher Section -->
+    <div id="createVoucher" class="voucher-container">
+      <h2>Create New Voucher</h2>
+      <form id="voucherForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Voucher Name</label>
+          <input type="text" name="voucherName" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Discount Value (%)</label>
+          <input type="number" name="discountValue" class="form-control" required min="1" max="100">
+        </div>
+        <div class="form-group">
+          <label>Max Discount</label>
+          <input type="number" name="maxDiscount" class="form-control" required min="1">
+        </div>
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" name="startDate" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>End Date</label>
+          <input type="date" name="endDate" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" name="quantity" class="form-control" required min="1">
+        </div>
+        <button type="submit" class="btn-primary">Create Voucher</button>
+      </form>
+    </div>
+
+    <!-- Voucher List Section -->
+    <div id="voucherList" class="voucher-container hidden">
+      <h2>Voucher List</h2>
+      <div class="filter-container">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search vouchers...">
+        <select id="statusFilter" class="form-control">
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="expired">Expired</option>
+        </select>
+      </div>
+      <div class="voucher-list">
+        <table>
+          <thead>
+            <tr>
+              <th onclick="sortTable('voucherName')">Voucher Name</th>
+              <th onclick="sortTable('discountValue')">Discount (%)</th>
+              <th onclick="sortTable('maxDiscount')">Max Discount</th>
+              <th onclick="sortTable('quantity')">Quantity</th>
+              <th onclick="sortTable('startDate')">Start Date</th>
+              <th onclick="sortTable('endDate')">End Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="voucherTableBody"></tbody>
+        </table>
+      </div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+
+  <script>
+    let vouchers = [];
+    let currentPage = 1;
+    const itemsPerPage = 5;
+    let sortConfig = {
+      column: null,
+      direction: 'asc'
+    };
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchVouchers();
+    });
+
+    // Toggle views
+    function showCreateVoucher() {
+      document.getElementById('createVoucher').classList.remove('hidden');
+      document.getElementById('voucherList').classList.add('hidden');
+    }
+
+    function showVoucherList() {
+      document.getElementById('voucherList').classList.remove('hidden');
+      document.getElementById('createVoucher').classList.add('hidden');
+      fetchVouchers();
+    }
+
+    // Fetch vouchers from server
+    async function fetchVouchers() {
+      try {
+          const response = await fetch('/admin-voucher/api/vouchers');
+          const data = await response.json();
+          if (data.success) {
+              vouchers = data.vouchers;
+              renderVoucherList();
+          } else {
+              console.error('Failed to fetch vouchers');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
+  }
+  
+  // Sửa hàm handleSubmit trong form submit
+  async function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const voucherData = Object.fromEntries(formData.entries());
+  
+      try {
+          const response = await fetch('/admin-voucher/api/add', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(voucherData),
+          });
+  
+          const data = await response.json();
+          if (data.success) {
+              alert('Voucher created successfully!');
+              form.reset();
+              fetchVouchers();
+          } else {
+              alert('Failed to create voucher: ' + data.message);
+          }
+      } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred while creating the voucher');
+      }
+  }
+
+    // Filter and sort functions
+    function filterVouchers() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const statusFilter = document.getElementById('statusFilter').value;
+
+      return vouchers.filter(voucher => {
+        const matchesSearch = voucher.voucherName.toLowerCase().includes(searchTerm);
+        const isActive = new Date(voucher.endDate) > new Date();
+        const matchesStatus = !statusFilter || 
+          (statusFilter === 'active' && isActive) || 
+          (statusFilter === 'expired' && !isActive);
+
+        return matchesSearch && matchesStatus;
+      });
+    }
+
+    function sortTable(column) {
+      if (sortConfig.column === column) {
+        sortConfig.direction = sortConfig.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortConfig.column = column;
+        sortConfig.direction = 'asc';
+      }
+
+      vouchers.sort((a, b) => {
+        let valueA = a[column];
+        let valueB = b[column];
+
+        if (column.includes('Date')) {
+          valueA = new Date(valueA);
+          valueB = new Date(valueB);
+        }
+
+        if (valueA < valueB) return sortConfig.direction === 'asc' ? -1 : 1;
+        if (valueA > valueB) return sortConfig.direction === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      renderVoucherList();
+    }
+
+    // Render functions
+    function renderVoucherList() {
+      const filteredVouchers = filterVouchers();
+      const start = (currentPage - 1) * itemsPerPage;
+      const paginatedVouchers = filteredVouchers.slice(start, start + itemsPerPage);
+      
+      const tbody = document.getElementById('voucherTableBody');
+      tbody.innerHTML = '';
+
+      paginatedVouchers.forEach(voucher => {
+        const isActive = new Date(voucher.endDate) > new Date();
+        const row = `
+          <tr>
+            <td>${voucher.voucherName}</td>
+            <td>${voucher.discountValue}%</td>
+            <td>${voucher.maxDiscount}</td>
+            <td>${voucher.quantity}</td>
+            <td>${new Date(voucher.startDate).toLocaleDateString()}</td>
+            <td>${new Date(voucher.endDate).toLocaleDateString()}</td>
+            <td class="voucher-status-${isActive ? 'active' : 'expired'}">
+              ${isActive ? 'Active' : 'Expired'}
+            </td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+
+      renderPagination(filteredVouchers.length);
+    }
+
+    function renderPagination(totalItems) {
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.classList.toggle('active', i === currentPage);
+        button.onclick = () => {
+          currentPage = i;
+          renderVoucherList();
+        };
+        pagination.appendChild(button);
+      }
+    }
+
+    // Event listeners
+    document.getElementById('searchInput').addEventListener('input', () => {
+      currentPage = 1;
+      renderVoucherList();
+    });
+
+    document.getElementById('statusFilter').addEventListener('change', () => {
+      currentPage = 1;
+      renderVoucherList();
+    });
+  </script>
+</body>
+</html>

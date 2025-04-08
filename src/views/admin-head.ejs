@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TicketZen - Your Ticket to the Silver Screen</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+            rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="css/admin-style.css" rel="stylesheet" />
+    
+    <style>
+        /* Định dạng nền menu khi mở */
+        .navbar-collapse {
+            background-color: black; 
+            position: fixed; 
+            top: 0;
+            right: 0;
+            width: 250px; 
+            height: 100vh; 
+            transform: translateX(100%);
+            transition: transform 0.3s ease; 
+            padding-top: 50px;
+        }
+        /* Khi navbar được mở, menu sẽ di chuyển vào */
+        .navbar-collapse.show {
+            transform: translateX(0); 
+        }
+
+        /* Tùy chỉnh cho các liên kết */
+        .navbar-nav .nav-item .nav-link {
+            color: white !important; 
+            font-size: 18px;
+            padding: 15px 20px;
+            display: block;
+        }
+
+        /* Khi hover trên các liên kết, đổi màu */
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+        <a href="/" class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="fw-bold text-accent m-0">
+                TicketZ<span class="text-divider">en</span>
+            </h1>
+        </a>
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="/adminPage-create" class="nav-item nav-link">Create Event</a>
+            <a href="/adminPage-eventlist" class="nav-item nav-link">Event List</a>
+            <a href="/admin-voucher" class="nav-item nav-link">Voucher</a>
+            <a href="/admin-policy" class="nav-item nav-link">Policy</a>
+            <a href="/logout" class="nav-item nav-link">Log Out</a>
+        </div>
+        <!-- Toggler Button, chỉ hiển thị khi màn hình nhỏ -->
+        <button class="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div style="display: flex !important" class="navbar-collapse collapse navbar-expand-lg" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/adminPage-create" class="nav-item nav-link">Create Event</a>
+                <a href="/adminPage-eventlist" class="nav-item nav-link">Event List</a>
+                <a href="/admin-voucher" class="nav-item nav-link">Voucher</a>
+                <a href="/admin-policy" class="nav-item nav-link">Policy</a>
+                <a href="/logout" class="nav-item nav-link">Log Out</a>
+            </div>
+        </div>
+        
+    </nav>
+    <!-- Navbar End -->
+    
+    <!-- Add Bootstrap JS to enable the toggler functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('navbarCollapse');
+            menu.classList.toggle('show');
+        }
+
+        // Đóng menu khi nhấn vào bất kỳ chỗ nào ngoài menu
+        document.addEventListener('click', function(event) {
+            var menu = document.getElementById('navbarCollapse');
+            var toggleButton = document.querySelector('.navbar-toggler');
+            
+            if (!menu.contains(event.target) && !toggleButton.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

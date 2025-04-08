@@ -1,0 +1,77 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    color: #1b1a55;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+.border-end {
+    border-right: 1px solid #dee2e6;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.event-banner {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.text-submitted {
+    color: #28a745;
+}
+
+.text-not-happened {
+    color: #d82b18;
+}
+
+.btn-custom, .btn-custom:hover, .btn-custom:active, .btn-custom:focus {
+    width: 150px;
+    height: 36px;
+    border: 1px #000 solid;
+    border-right: 2px #000 solid;
+    border-bottom: 2px #000 solid;
+    border-radius: 0;
+    padding: 4px 8px; /* Adjust for spacing */
+    cursor: pointer;
+    font-size: 14px; /* Font size for readability */
+}
+
+.btn-custom {
+    background-color: #FFF;
+    color: #000;
+    /* position: absolute;
+    bottom: 16px; /* Adjust for padding */
+    /* left: 32px; /* Adjust for alignment */
+    transition: 0.3s ease-in;
+}
+
+.btn-custom:hover {
+    background-color: #000; /* Dark background on hover */
+    color: #FFF; /* White text on hover */
+    transition: 0.3s ease-in-out;
+}

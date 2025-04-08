@@ -1,0 +1,114 @@
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown .dropdown-menu {
+    min-width: 200px;
+}
+
+.profile-dropdown .dropdown-item {
+    padding: 8px 20px;
+}
+
+.profile-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.profile-dropdown .dropdown-divider {
+    margin: 0.5rem 0;
+}
+
+/* Giao diện chỉnh sửa profile */
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(135deg, #1e2024 0%, #17181c 100%);
+    color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.profile-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+h1 {
+    color: #fff;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #a0a0a0;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #f8f8f8;
+    font-size: 0.9em;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+}
+
+.back-to-home {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-to-home a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-to-home a:hover {
+    text-decoration: underline;
+}
+
+.form-group:last-child:hover {
+    cursor: default;
+}

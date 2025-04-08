@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Sự Kiện</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Thay bằng đường dẫn đến file CSS của bạn -->
+</head>
+<body>
+    <header>
+        <h1>Danh Sách Sự Kiện</h1>
+    </header>
+    
+    <main>
+        <% if (events.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên Sự Kiện</th>
+                        <th>Ngày</th>
+                        <th>Thời Gian</th>
+                        <th>Trạng Thái</th>
+                        <th>Số Vé Có Sẵn</th>
+                        <th>Địa Điểm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% events.forEach(event => { %>
+                        <tr>
+                            <td><%= event.name %></td>
+                            <td><%= new Date(event.date).toLocaleDateString('vi-VN') %></td>
+                            <td><%= event.time %></td>
+                            <td><%= event.status === 'on-sale' ? 'Đang mở bán' : 'Hết vé' %></td>
+                            <td><%= event.availableTickets %></td>
+                            <td><%= event.location %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="?page=<%= currentPage - 1 %>">Trang trước</a>
+                <% } %>
+                <span>Trang <%= currentPage %> / <%= totalPages %></span>
+                <% if (hasNextPage) { %>
+                    <a href="?page=<%= currentPage + 1 %>">Trang sau</a>
+                <% } %>
+            </div>
+        <% } else { %>
+            <p>Không có sự kiện nào.</p>
+        <% } %>
+    </main>
+</body>
+</html>

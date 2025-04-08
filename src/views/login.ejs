@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TicketZen - Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/login_register.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container-fluid login-page">
+      <div class="login-box">
+        <div class="logo-section">
+          <h1 class="fw-bold text-accent">
+            TicketZ<span class="text-divider">en</span>
+          </h1>
+          <p class="subtitle">Welcome back! Please login to your account.</p>
+        </div>
+
+        <form action="/login" method="post" class="login-form">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-icon">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-icon">
+                <i class="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" name="remember" />
+              <span>Remember me</span>
+            </label>
+            <a href="/forgot-password" class="forgot-password"
+              >Forgot Password?</a
+            >
+          </div>
+
+          <% if (errorMessage && errorMessage != "") { %>
+          <p class="error-message">
+            <i class="fas fa-exclamation-circle"></i> <%= errorMessage %>
+          </p>
+          <% } %>
+
+          <button class="login-btn" type="submit">
+            Login <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div class="divider">
+          <span>or continue with</span>
+        </div>
+
+        <div class="social-login">
+          <a href="/google">
+            <button class="social-btn google">
+              <i class="fab fa-google"></i>
+            </button>
+          </a>
+          <a href="/facebook">
+            <button class="social-btn facebook">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+          </a>
+          <button class="social-btn twitter">
+            <i class="fab fa-twitter"></i>
+          </button>
+        </div>
+
+        <p class="register-link">
+          Don't have an account? <a href="/signup">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

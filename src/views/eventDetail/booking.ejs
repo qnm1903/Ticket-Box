@@ -1,0 +1,143 @@
+<%- include('../head')-%>
+<style>
+    #cartTabs .nav-link.active {
+        background-color: rgba(93, 134, 150, 0.644); /* Màu nền khi nút active */
+        color: white; /* Màu chữ */
+        border: none; /* Loại bỏ viền */
+    }
+</style>
+<link rel="stylesheet" href="/css/booking.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=book_online,calendar_today,location_on" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=book_online,calendar_today,location_on" />
+<!-- Cart Section Start -->
+<div class="container py-5" style="margin-top: 100px">
+    <div class="row mt-8 w-100">
+        <!-- Left Section: Tabs for Tickets and Vouchers -->
+        <div class="col-lg-5 mb-4">
+            <div class="card">
+                <div class="card-header" style="background-color: rgba(119, 170, 190, 0.863)">
+                    <ul class="nav nav-tabs card-header-tabs" id="cartTabs" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="tickets-tab" data-bs-toggle="tab" data-bs-target="#ticketss" type="button" role="tab" aria-controls="tickets" aria-selected="true">
+                                Tickets
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="vouchers-tab" data-bs-toggle="tab" data-bs-target="#vouchers" type="button" role="tab" aria-controls="vouchers" aria-selected="false">
+                                Vouchers
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body" style="background-color: rgba(93, 134, 150, 0.644)">
+                    <div class="tab-content" id="cartTabsContent">
+                        <!-- Tickets Tab -->
+                        <div class="tab-pane fade show active" id="ticketss" role="tabpanel" aria-labelledby="tickets-tab">
+                          <div id="tickets" data-ticket-info="<%- encodeURIComponent(JSON.stringify(ticketTypes)) %>">
+                            <!-- Tickets will be rendered here -->
+                          </div>
+                          <div id="pagination" class="pagination-container">
+                            <button id="prevPage" class="pagination-btn">Previous</button>
+                            <span id="pageInfo" class="pagination-info"></span>
+                            <button id="nextPage" class="pagination-btn">Next</button>
+                          </div>
+                        </div>
+                        <!-- Vouchers Tab -->
+                        <div class="tab-pane fade" id="vouchers" role="tabpanel" aria-labelledby="vouchers-tab" 
+                        data-voucher-info="<%- encodeURIComponent(JSON.stringify(vouchers)) %>">
+                          <% vouchers.forEach(voucher => { %>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h6 class="mb-1"><%= voucher.voucherName %></h6>
+                                    <small>Discount: <%= voucher.discountValue %> %</small>
+                                </div>
+                            </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section: Payment Summary -->
+        <div class="col-lg-7">
+          <div class="order-summary">
+            <p id="order-title">Your Order</p>
+            <h3 class="text-dark"><%= event.title %></h3>
+            <p>
+              <span class="material-symbols-outlined">calendar_today</span>
+              <%= event.endDate.toString().slice(0,24) %> %>
+            </p>
+            <p>
+              <span class="material-symbols-outlined">location_on</span>
+              <%= event.addressProvince%>, <%= event.addressDetail %>
+            </p>
+            <hr class="divider"></hr>
+            <h3 class='vouchers-title text-dark'>Vouchers</h3>
+            <input type="text" id="voucher-input" placeholder="Enter voucher code" />
+            <button id="apply-voucher-btn" class="btn btn-primary">Apply</button>
+            <hr class="divider"></hr>
+            <h3 class="pricing-title text-dark">Pricing</h3>
+            <div class="pricing" id="pricing">
+              <!-- Pricing details will be rendered here -->
+            </div>
+            <hr class="divider"></hr>
+            <div class="total">
+              <div class="icon-container">
+                <span class="material-symbols-outlined" id="book-online-icon">book_online</span>
+                <span id="total-tickets">0</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal:</span>
+                <span id="total-price">0 ₫</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                  <span>Total Discount:</span>
+                  <span id="total-discount">0 ₫</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                  <strong>Total:</strong>
+                  <strong id="final-price">0 ₫</strong>
+              </div>
+              <!-- <div id="total-price">0₫</div>
+              <div id="total-discount">0%</div>
+              <div id="final-price">0₫</div> -->
+            </div>
+    
+            <div class="btn-container">
+              <button class="cart-btn">
+                Add to cart
+              </button>
+              <button class="book-now-btn" id="booknow-btn">Book now</button>
+            </div>
+          </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 class="payment-modal-title">Chọn phương thức thanh toán bạn muốn dùng</h3>
+      <div class="payment-options">
+            <button id="zalopayBtn" class="payment-btn zalopay">
+                <img src="https://play-lh.googleusercontent.com/woYAzPCG1I8Z8HXCsdH3diL7oly0N8uth_1g6k7R_9Gu7lbxrsYeriEXLecRG2E9rP0=s96-rw" alt="ZaloPay">
+            </button>
+
+            <button id="momoBtn" class="payment-btn momo">
+                <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square.png" alt="MoMo">
+            </button>
+      </div>
+  </div>
+</div>
+
+<div id="customer-data" data-customer="<%- encodeURIComponent(JSON.stringify(customer)) %>" data-event-id="<%- encodeURIComponent(event._id) %>" style="display: none;"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="/js/booking/booking.js"></script>
+<script src="/js/booking/bookingStorage.js"></script>
+<script src="/js/booking/addToCart.js" type="module"></script>
+<script type="module" src="/js/booking/payment.js"></script>
+<!-- Cart Section End -->
+<%- include('../foot')-%>
+

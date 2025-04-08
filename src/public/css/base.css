@@ -1,0 +1,40 @@
+*{
+    box-sizing:inherit;
+}
+html{
+    font-size:var(--text-size);
+    background-color: var(--background-color);
+    line-height:var(--text-size);
+    font-family: var(--font-family);
+}
+.grid{
+    width:1200px;
+    max-width:100%;
+    margin:0 auto;
+}
+.grid__full-width{
+    width:100%;
+}
+.grid__row{
+    display: flex;
+    flex-wrap:wrap;
+}
+button{
+    cursor:pointer;
+    padding: 5px 20px;
+    margin: 0 10px;
+    border-radius:10px;
+    font-size:var(--text-size);
+    border-color: transparent;
+}
+h1{
+    font-family: 'Alfa Slab One', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size:24px;
+}
+
+.footer{
+    height:200px;
+    background-color: black;
+}
