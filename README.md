@@ -7,7 +7,7 @@ npm i
 npm start
 3. Mở trình duyệt và truy cập địa chỉ sau
 http://localhost:3007
-4. Hoặc có thể lên đường dẫn sau để xem trực tiếp trang web (to be added)
+4. Hoặc có thể lên đường dẫn sau để xem trực tiếp trang web (https://ticket-box-eta.vercel.app/)
 5. Đăng nhập bằng tài khoản:
 minhquach9@gmail.com
 Minh@1234

@@ -12,7 +12,7 @@ import moment from 'moment';
 
 let HostURL;
 let ipnURL;
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'pro') {
     HostURL = `http://localhost:${process.env.PORT}`;
     try {
         ipnURL = await ngrok.connect({
@@ -25,6 +25,9 @@ if (process.env.NODE_ENV !== 'production') {
     } catch (err) {
         console.error('Lỗi kết nối ngrok:', err);
     } // URL free, thay đổi liên tục mỗi lần chạy nên cần thay mỗi lần chạy local
+} else {
+    HostURL = `https://ticket-box-eta.vercel.app`;
+    ipnURL = `https://ticket-box-eta.vercel.app`;
 }
 
 // demo config zalopay
