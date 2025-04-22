@@ -8,19 +8,19 @@ import mongoose from 'mongoose';
 import crypto from 'crypto';
 import ngrok from 'ngrok';
 import CryptoJS from 'crypto-js';
-import uuid from 'uuid/v1';
+import moment from 'moment';
 
 let HostURL;
 let ipnURL;
 if (process.env.NODE_ENV !== 'production') {
-    HostURL = 'http://localhost:3007';
+    HostURL = `http://localhost:${process.env.PORT}`;
     try {
         ipnURL = await ngrok.connect({
-            proto: 'https',
-            addr: 3007,
+            proto: 'http',
+            addr: parseInt(process.env.PORT,10),
             authtoken: process.env.NGROK_AUTH_TOKEN,
             region: 'ap',
-        });
+        }); 
         console.log(`Ngrok IPN URL: ${ipnURL}`);
     } catch (err) {
         console.error('Lỗi kết nối ngrok:', err);
@@ -29,11 +29,13 @@ if (process.env.NODE_ENV !== 'production') {
 
 // demo config zalopay
 const zalopayConfig = {
-    appid: "553",
-    key1: "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q",
-    key2: "Iyz2habzyr7AG8SgvoBCbKwKi3UzlLi3",
-    endpoint: "https://sbgateway.zalopay.vn/api/getlistmerchantbanks"
+    app_id: "2554",
+    key1: "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn",
+    key2: "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf",
+    endpoint: "https://sb-openapi.zalopay.vn/v2/create"
 };
+
+let transactionid = null;
 
 const createPayment = async (req, res) => {
     const session = await mongoose.startSession();
@@ -56,6 +58,7 @@ const createPayment = async (req, res) => {
 
         // Bước 2: Lưu vào Redis với expiry time 15 phút
         const transactionId = `transaction:${customerID}:${Date.now()}`;
+        transactionid = transactionId;
         extraData = { ...extraData, transactionId };
         const extraDataString = JSON.stringify(extraData);
         const encodedExtraData = Buffer.from(extraDataString).toString('base64');
@@ -69,7 +72,6 @@ const createPayment = async (req, res) => {
         if (!redisSet) {
             throw new Error("Lỗi lưu giao dịch vào Redis.");
         }
-
         // Nếu tất cả thành công, commit transaction
         await session.commitTransaction();
 
@@ -117,41 +119,47 @@ const createPayment = async (req, res) => {
                     'Content-Type': 'application/json'
                 }
             });
-
-            return res.status(201).json(response.data.payUrl);
+            return res.status(201).json({url: response.data.payUrl, success: true});
         }
 
         if (method === 'zalopay') {
             const embeddata = {
-                redirectUrl: `${HostURL}/payment-result`, // URL trả về sau khi thanh toán thành công
+                redirecturl: `${HostURL}/payment-result`, // URL trả về sau khi thanh toán thành công
             };
-              
+
+            let mergeddata = {...embeddata, ...extraData};
+            const transID = Math.floor(Math.random() * 1000000);
             const order = {
-                appid: zalopayConfig.appid, 
-                apptransid: `${moment().format('YYMMDD')}_${uuid()}`, // mã giao dich có định dạng yyMMdd_xxxx
-                appuser: "demo", 
-                apptime: Date.now(), // miliseconds
-                item: JSON.stringify(selectedTicketsArray), 
-                embeddata: JSON.stringify(embeddata), 
-                amount: parseInt(finalprice), 
+                app_id: zalopayConfig.app_id, 
+                app_trans_id: `${moment().format('YYMMDD')}_${transID}`, // mã giao dich có định dạng yyMMdd_xxxx
+                app_user: "user123", 
+                app_time: Date.now(), // miliseconds
+                item: JSON.stringify(selectedTicketsArray), // thông tin vé đã chọn
+                embed_data: JSON.stringify(mergeddata), 
+                amount: parseInt(finalprice,10), 
                 description: "ZaloPay Integration Demo",
-                bankcode: "zalopayapp",
-                callback_url: `${ipnURL}/api/v1/payment-status`, // URL callback
+                bank_code: "",
+                callback_url: `${ipnURL}/api/v1/payment-status-zalopay`, // URL callback
             };
               
             // appid|apptransid|appuser|amount|apptime|embeddata|item
-            const data = zalopayConfig.appid + "|" + order.apptransid + "|" + order.appuser + "|" + order.amount + "|" + order.apptime + "|" + order.embeddata + "|" + order.item;
+            const data = zalopayConfig.app_id + "|" + order.app_trans_id + "|" + order.app_user + "|" + order.amount + "|" + order.app_time + "|" + order.embed_data + "|" + order.item;
             order.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
-              
+
             axios.post(zalopayConfig.endpoint, null, { params: order })
-            .then(response => {
-                console.log(response.data);
-                return res.status(201).json(response.data.orderurl);
+            .then(async (response) => {
+                if (response.data.return_code !== 1) {
+                    throw new Error('Lỗi tạo đơn hàng Zalopay: ' + response.data.return_message + ' - ' + 'Code: ' + response.data.sub_return_code + ' - ' + response.data.sub_return_message);
+                }
+                return res.status(201).json({url: response.data.order_url, success: true});
             })
             .catch(err => console.log(err));
         }
     } catch (error) {
         await session.abortTransaction();
+        await redisClient.client.del([transactionid]);
+        
+        await redisClient.client.hDel("pending_transactions", transactionid);
         console.log(error.message)
         res.status(400).json({ success: false, message: error.message });
     } finally {
@@ -213,12 +221,14 @@ const getPaymentStatus = async (req, res, next) => {
 
                 console.log('createOrder:', createOrder);
 
-                redisClient.client.del([callbackDetail.transactionId], (err, reply) => {
+                await redisClient.client.del([callbackDetail.transactionId], (err, reply) => {
                     if (err) {
                         console.log(err.message);
                     }
                     console.log('Deleted key',reply);
                 });
+
+                await redisClient.client.hDel("pending_transactions", callbackDetail.transactionId);
 
                 await session.commitTransaction();
                 await session.endSession();
@@ -235,11 +245,12 @@ const getPaymentStatus = async (req, res, next) => {
                     );
                 }
 
-                redisClient.client.del([callbackDetail.transactionId], (err, reply) => {
+                await redisClient.client.del([callbackDetail.transactionId], (err, reply) => {
                     if (err) {
                         console.log(err.message);
                     }
                 });
+                await redisClient.client.hDel("pending_transactions", callbackDetail.transactionId);
 
                 await session.commitTransaction();
                 await session.endSession();
@@ -267,10 +278,18 @@ const getPaymentStatus = async (req, res, next) => {
 
 const getPaymentResult = async (req, res, next) => {
     const { resultCode } = req.query;
+
     if (resultCode === '0') {
         res.render('payment-success');
     } else {
-        res.render('payment-failure');
+        if (resultCode === undefined) {
+            const { status } = req.query;
+            if (status === '1') {
+                res.render('payment-success');
+            }
+        } else {
+            res.render('payment-failure');
+        }
     }
 }
 
@@ -283,18 +302,24 @@ const getPaymentStatusZaloPay = async (req, res, next) => {
 
     while (retries < MAX_RETRIES) {
         try {
-            let extraData = req.body.data;
+            let dataStr = req.body.data;
+            console.log('dataStr:', dataStr);
             let reqMac = req.body.mac;
-            let mac = CryptoJS.HmacSHA256(extraData, zalopayConfig.key2).toString();
+            console.log('reqMac', reqMac);
+            let mac = CryptoJS.HmacSHA256(dataStr, zalopayConfig.key2).toString();
+            console.log('mac:', mac);
             // Kiểm tra callback hợp lệ
             if (reqMac !== mac) {
                 resultCode = -1;
-                return res.status(400).json({ success: false, message: "Callback không hợp lệ" });
+                throw new Error('Lỗi xác thực callback từ Zalopay');
             }
 
-            const decodedExtraData = Buffer.from(extraData, 'base64').toString('utf-8');
-            console.log('decodedExtraData:', decodedExtraData);
-            const callbackDetail = JSON.parse(decodedExtraData);
+            // const decodedExtraData = Buffer.from(extraData, 'base64').toString('utf-8');
+            // console.log('decodedExtraData:', decodedExtraData);
+            const dataJSON = JSON.parse(dataStr);
+            const extraData = dataJSON.embed_data;
+            console.log('extraData:', extraData);
+            const callbackDetail = JSON.parse(extraData);
             if (resultCode === 0) {
                 session = await mongoose.startSession();
                 session.startTransaction();
@@ -335,12 +360,14 @@ const getPaymentStatusZaloPay = async (req, res, next) => {
                     'payment.datePayment': new Date(),
                 }], { session });
 
-                redisClient.client.del([callbackDetail.transactionId], (err, reply) => {
+                await redisClient.client.del([callbackDetail.transactionId], (err, reply) => {
                     if (err) {
                         console.log(err.message);
                     }
                     console.log('Deleted key',reply);
                 });
+                
+                await redisClient.client.hDel("pending_transactions", callbackDetail.transactionId);
 
                 await session.commitTransaction();
                 await session.endSession();
@@ -362,6 +389,7 @@ const getPaymentStatusZaloPay = async (req, res, next) => {
                         console.log(err.message);
                     }
                 });
+                await redisClient.client.hDel("pending_transactions", callbackDetail.transactionId);
 
                 await session.commitTransaction();
                 await session.endSession();

@@ -6,7 +6,7 @@ const paymentSchema = new Schema(
         methodPayment: {
             type: String,
             required: true,
-            enum: ['momo', 'zaloPay'],
+            enum: ['momo', 'zalopay'],
         },
         datePayment: {
             type: Date,

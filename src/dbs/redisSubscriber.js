@@ -23,36 +23,6 @@ while (!notifySet) {
     }
 }
 
-// // Quét tất cả các transaction:* và đặt lại vào pending_transactions
-// async function restorePendingTransactions() {
-//     try {
-//         const reply = await redisClient.client.scan("0", {
-//             MATCH: "transaction:*",
-//             COUNT: 100
-//         });
-
-//         if (reply.keys.length > 0) {
-//             const transactionEntries = [];
-//             for (const key of reply.keys) {
-//                 const transactionData = await redisClient.client.get(key);
-//                 if (transactionData) {
-//                     transactionEntries.push([key, transactionData]);
-//                 }
-//             }
-
-//             if (transactionEntries.length > 0) {
-//                 await redisClient.client.hSet("pending_transactions", transactionEntries);
-//                 console.log(`Restored ${transactionEntries.length} pending transactions`);
-//             }
-//         } else {
-//             console.log("No pending transactions found to restore");
-//         }
-//     } catch (error) {
-//         console.error("Error restoring pending transactions:", error);
-//     }
-// }
-// await restorePendingTransactions();
-
 // Redis không cho dùng chung kết nối get/set và pub/sub
 const redisSubscriber = createClient({
     url: `rediss://default:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
@@ -70,7 +40,7 @@ await redisSubscriber.connect();
 
 async function handleExpiredTransaction(transactionID) {
     // Lấy dữ liệu từ pending_transactions
-    const transactionData = await redisClient.client.hGet("pending_transactions", transactionID);
+    let transactionData = await redisClient.client.hGet("pending_transactions", transactionID);
     if (!transactionData) {
         console.log(`Không tìm thấy ${transactionID} trong pending_transactions.`);
         transactionData = await redisClient.client.get(transactionID);

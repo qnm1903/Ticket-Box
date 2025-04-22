@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/api/v1/payment', PaymentController.createPayment);
 router.get('/payment-result', PaymentController.getPaymentResult);
 router.post('/api/v1/payment-status', PaymentController.getPaymentStatus);
-router.get('/api/v1/payment-status-zalopay', PaymentController.getPaymentStatusZaloPay);
+router.post('/api/v1/payment-status-zalopay', PaymentController.getPaymentStatusZaloPay);
 
 export default router;

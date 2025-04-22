@@ -59,9 +59,12 @@ zalopayBtn.onclick = function() {
         }
     })
     .then(response => {
-        console.log('ZaloPay Payment Successful:', response.data);
-        window.open(response.data);
-        modal.style.display = "none";
+        if (response.data.success == true) {
+            console.log('Zalopay Payment Successful:', response.data.url);
+            window.open(response.data.url);
+        } else {
+            alert('Zalopay payment failed. Please try again. \n Lỗi: ' + response.data.message);
+        }
     })
     .catch(error => {
         console.error('ZaloPay Payment Error:', error);
@@ -89,8 +92,12 @@ momoBtn.onclick = function() {
         }
     })
     .then(response => {
-        console.log('Momo Payment Successful:', response.data);
-        window.open(response.data);
+        if (response.data.success == true) {
+            console.log('Momo Payment Successful:', response.data.url);
+            window.open(response.data.url);
+        } else {
+            alert('Momo payment failed. Please try again. \n Lỗi: ' + response.data.message);
+        }
         modal.style.display = "none";
     })
     .catch(error => {
